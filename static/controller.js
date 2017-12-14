@@ -3,7 +3,7 @@ var control_forward = function() {
     r.open("GET", "/api/control/forward");
     r.send();
     reset_color();
-    document.getElementById("forward-button").style.backgroundColor = "lightgray";
+    document.getElementById("forward-button").style.backgroundColor = "rgb(234, 250, 241)";
 };
 
 var control_left = function() {
@@ -11,7 +11,7 @@ var control_left = function() {
     r.open("GET", "/api/control/left");
     r.send();
     reset_color();
-    document.getElementById("left-button").style.backgroundColor = "lightgray";
+    document.getElementById("left-button").style.backgroundColor = "rgb(254, 249, 231)";
 };
 
 var control_right = function() {
@@ -19,7 +19,7 @@ var control_right = function() {
     r.open("GET", "/api/control/right");
     r.send();
     reset_color();
-    document.getElementById("right-button").style.backgroundColor = "lightgray";
+    document.getElementById("right-button").style.backgroundColor = "rgb(254, 249, 231)";
 };
 
 var control_stop = function() {
@@ -27,7 +27,7 @@ var control_stop = function() {
     r.open("GET", "/api/control/stop");
     r.send();
     reset_color();
-    document.getElementById("stop-button").style.backgroundColor = "lightgray";
+    document.getElementById("stop-button").style.backgroundColor = "rgb(242, 243, 244)";
 };
 
 var reset_color = function() {
