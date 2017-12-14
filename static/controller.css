@@ -1,0 +1,42 @@
+#buttons-container {
+    position: absolute;
+    width: 305px;
+    height: 310px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.control-button {
+    position: absolute;
+    width: 150px;
+    height: 100px;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    line-height: 100px;
+    color: rgb(16, 16, 16);
+    font-family: "Helvetica";
+}
+
+#forward-button {
+    top: 0;
+    left: 77.5px;
+}
+
+#left-button {
+    top: 105px;
+    left: 0;
+}
+
+#right-button {
+    top: 105px;
+    right: 0;
+}
+
+#stop-button {
+    bottom: 0;
+    left: 77.5px;
+}
