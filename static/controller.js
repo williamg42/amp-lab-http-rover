@@ -66,7 +66,35 @@ document.onmouseup = function() {
     forward = false;
     left = false;
     right = false;
-    stop();
+    control_stop();
+};
+
+document.getElementById("forward-button").ontouchstart = function() {
+    if (!forward) {
+        control_forward();
+        forward = true;
+    }
+};
+
+document.getElementById("left-button").ontouchstart = function() {
+    if (!left) {
+        control_left();
+        left = true;
+    }
+};
+
+document.getElementById("right-button").ontouchstart = function() {
+    if (!right) {
+        control_right();
+        right = true;
+    }
+};
+
+document.ontouchend = function() {
+    forward = false;
+    left = false;
+    right = false;
+    control_stop();
 };
 
 document.onkeydown = function(e) {
@@ -107,6 +135,6 @@ document.onkeyup = function(e) {
         right = false;
     }
     if (!left && !forward && !right) {
-        stop();
+        control_stop();
     }
 };

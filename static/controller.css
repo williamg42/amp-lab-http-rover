@@ -19,6 +19,9 @@
     line-height: 100px;
     color: rgb(16, 16, 16);
     font-family: "Helvetica";
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 #forward-button {
