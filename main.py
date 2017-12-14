@@ -1,17 +1,11 @@
 import sys
 
-from motor_controller import MotorController
+#from motor_controller import MotorController
 
 from flask import Flask
 from flask import render_template
 
 app = Flask(__name__)
-
-try:
-    controller = MotorController(sys.argv[1], sys.argv[2])
-except:
-    print('Usage: python main.py 1 2')
-    sys.exit(1)
 
 @app.route('/')
 def controller():
@@ -32,7 +26,16 @@ def api_control(direction=None):
     return ('', 204)
 
 def main():
-    app.run(host='0.0.0.0', port=8000, threaded=False, debug=False)
+
+    if len(sys.argv) != 3:
+        print('Usage: python main.py [left_motor_pin_number] [right_motor_pin_number]')
+    else:
+        try:
+            global controller
+            controller = MotorController(int(sys.argv[1]), int(sys.argv[2]))
+            app.run(host='0.0.0.0', port=8000, threaded=False, debug=False)
+        except ValueError:
+            print('Unable to parse command line arguments.')
 
 if __name__ == '__main__':
     main()
