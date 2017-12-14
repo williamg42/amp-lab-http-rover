@@ -1,7 +1,17 @@
+import sys
+
+from motor_controller import MotorController
+
 from flask import Flask
 from flask import render_template
 
 app = Flask(__name__)
+
+try:
+    controller = MotorController(sys.argv[1], sys.argv[2])
+except:
+    print('Usage: python main.py 1 2')
+    sys.exit(1)
 
 @app.route('/')
 def controller():
@@ -10,13 +20,13 @@ def controller():
 @app.route('/api/control/<direction>')
 def api_control(direction=None):
     if direction == 'forward':
-        pass
+        controller.forward()
     elif direction == 'left':
-        pass
+        controller.left()
     elif direction == 'right':
-        pass
+        controller.right()
     elif direction == 'stop':
-        pass
+        controller.stop()
     else:
         return ('', 400)
     return ('', 204)
