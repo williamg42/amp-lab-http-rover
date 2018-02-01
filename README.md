@@ -7,6 +7,8 @@ In `main.py`, select either `MotorController` (for the actual Onion motor contro
 
 Please view the [Getting Started](https://docs.onion.io/omega2-docs/first-time-setup.html) documentation from Onion to learn how to initially configure your device.
 
+There is an [easy guide](https://docs.onion.io/omega2-docs/connecting-to-wifi-networks-command-line.html) for configuring your network connection provided by Onion.
+
 One that is done, follow the following procedure.
 
 - Connect to your Onion device over WiFi.
