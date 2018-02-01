@@ -26,3 +26,11 @@ cd amp-lab-http-rover
 python main.py [left_motor_pin] [right_motor_pin]
 ```
 Where `left_motor_pin` and `right_motor_pin` are substituted with the correct values.
+
+## Usage
+
+Navigate to port 80 of the IP address of the Onion device in a web browser. Your URL should resemble the follwoing: `http://192.168.0.1:8000`.
+
+If the web page loads, you are good to go!
+
+Please create an Issue on this repository if you encounter any issues.
