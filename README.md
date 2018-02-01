@@ -2,3 +2,27 @@
 HTTP rover for AMP lab.
 
 In `main.py`, select either `MotorController` (for the actual Onion motor controller) or `MockMotorController` (for testing on a non-Onion machine) by commenting out the one you don't want.
+
+## Installation
+
+- Connect to your Onion device over WiFi.
+- Set up python and pip:
+```
+opkg update
+opkg install python
+opkg install python-pip
+```
+- Use pip to install Flask:
+```
+pip install flask
+```
+- Clone this git repostory onto your device:
+```
+git clone git@github.com:clcain/amp-lab-http-rover.git
+```
+- Navigate into the repository and start Python:
+```
+cd amp-lab-http-rover
+python main.py [left_motor_pin] [right_motor_pin]
+```
+Where `left_motor_pin` and `right_motor_pin` are substituted with the correct values.
