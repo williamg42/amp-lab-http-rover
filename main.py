@@ -1,6 +1,7 @@
 import sys
 
-from motor_controller import MotorController
+#from motor_controller import MotorController
+from mock_motor_controller import MockMotorController
 
 from flask import Flask
 from flask import render_template
@@ -32,7 +33,8 @@ def main():
     else:
         try:
             global controller
-            controller = MotorController(int(sys.argv[1]), int(sys.argv[2]))
+            #controller = MotorController(int(sys.argv[1]), int(sys.argv[2]))
+            controller = MockMotorController(int(sys.argv[1]), int(sys.argv[2]))
             app.run(host='0.0.0.0', port=8000, threaded=False, debug=False)
         except ValueError:
             print('Unable to parse command line arguments.')
