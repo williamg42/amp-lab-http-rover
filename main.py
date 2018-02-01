@@ -1,6 +1,6 @@
 import sys
 
-#from motor_controller import MotorController
+from motor_controller import MotorController
 
 from flask import Flask
 from flask import render_template
