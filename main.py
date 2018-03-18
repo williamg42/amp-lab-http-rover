@@ -3,16 +3,33 @@ import sys
 #from motor_controller import MotorController
 from mock_motor_controller import MockMotorController
 
-from flask import Flask
-from flask import render_template
+from bottle import route, run, Bottle
+from bottle import template
 
-app = Flask(__name__)
+from bottle import get, static_file
 
-@app.route('/')
+# Static Routes
+@get("/static/css/<filepath:re:.*\.css>")
+def css(filepath):
+    return static_file(filepath, root="static/css")
+
+@get("/static/font/<filepath:re:.*\.(eot|otf|svg|ttf|woff|woff2?)>")
+def font(filepath):
+    return static_file(filepath, root="static/font")
+
+@get("/static/img/<filepath:re:.*\.(jpg|png|gif|ico|svg)>")
+def img(filepath):
+    return static_file(filepath, root="static/img")
+
+@get("/static/js/<filepath:re:.*\.js>")
+def js(filepath):
+    return static_file(filepath, root="static/js")
+
+@route('/')
 def controller():
-    return render_template('controller.html')
+    return template('controller.html')
 
-@app.route('/api/control/<direction>')
+@route('/api/control/<direction>')
 def api_control(direction=None):
     if direction == 'forward':
         controller.forward()
@@ -35,7 +52,7 @@ def main():
             global controller
             #controller = MotorController(int(sys.argv[1]), int(sys.argv[2]))
             controller = MockMotorController(int(sys.argv[1]), int(sys.argv[2]))
-            app.run(host='0.0.0.0', port=8000, threaded=False, debug=False)
+            run(host='localhost', port=8000, debug=True)
         except ValueError:
             print('Unable to parse command line arguments.')
 
