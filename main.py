@@ -40,8 +40,8 @@ def api_control(direction=None):
     elif direction == 'stop':
         controller.stop()
     else:
-        return ('', 400)
-    return ('', 204)
+        return ('')
+    return ('')
 
 def main():
 
