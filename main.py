@@ -52,7 +52,7 @@ def main():
             global controller
             #controller = MotorController(int(sys.argv[1]), int(sys.argv[2]))
             controller = MockMotorController(int(sys.argv[1]), int(sys.argv[2]))
-            run(host='localhost', port=8000, debug=True)
+            run(host='0.0.0.0', port=8000, debug=True)
         except ValueError:
             print('Unable to parse command line arguments.')
 
