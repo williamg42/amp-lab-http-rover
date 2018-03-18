@@ -32,7 +32,8 @@ opkg install pyOnionGpio
 wget --no-check-certificate https://github.com/williamg42/amp-lab-http-rover/archive/master.tar.gz
 tar -xvzf master.tar.gz
 ```
-- Navigate into the repository and start Python:
+-Copy bottle.py into the new directory
+- Navigate into the directory and start Python:
 ```
 cd amp-lab-http-rover
 python main.py [left_motor_pin] [right_motor_pin]
