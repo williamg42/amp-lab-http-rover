@@ -15,10 +15,9 @@ One that is done, follow the following procedure.
 - Set up python-light and bottle:
 ```
 vi /etc/opkg.conf
-
+```
 — delete line ‘option check_signature 1'
-
-
+```
 opkg update
 mkdir -p /home/bottle
 cd /home/bottle
