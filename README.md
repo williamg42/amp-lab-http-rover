@@ -27,7 +27,7 @@ opkg install python-email
 opkg install python-codecs
 opkg install python-logging
 opkg install python-openssl
-```
+
 wget --no-check-certificate https://github.com/addresstbd
 ```
 - Navigate into the repository and start Python:
