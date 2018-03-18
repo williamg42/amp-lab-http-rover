@@ -12,19 +12,24 @@ There is an [easy guide](https://docs.onion.io/omega2-docs/connecting-to-wifi-ne
 One that is done, follow the following procedure.
 
 - Connect to your Onion device over WiFi.
-- Set up python and pip:
+- Set up python-light and bottle:
 ```
+vi /etc/opkg.conf
+
+— delete line ‘option check_signature 1'
+
+
 opkg update
-opkg install python
-opkg install python-pip
+mkdir -p /home/bottle
+cd /home/bottle
+wget --no-check-certificate https://github.com/defnull/bottle/raw/master/bottle.py
+opkg install python-light
+opkg install python-email
+opkg install python-codecs
+opkg install python-logging
+opkg install python-openssl
 ```
-- Use pip to install Flask:
-```
-pip install flask
-```
-- Clone this git repostory onto your device:
-```
-git clone git@github.com:clcain/amp-lab-http-rover.git
+wget --no-check-certificate https://github.com/addresstbd
 ```
 - Navigate into the repository and start Python:
 ```
