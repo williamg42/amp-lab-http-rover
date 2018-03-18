@@ -28,7 +28,8 @@ opkg install python-codecs
 opkg install python-logging
 opkg install python-openssl
 
-wget --no-check-certificate https://github.com/addresstbd
+wget --no-check-certificate https://github.com/williamg42/amp-lab-http-rover/archive/master.tar.gz
+tar -xvzf master.tar.gz
 ```
 - Navigate into the repository and start Python:
 ```
