@@ -60,8 +60,8 @@ document.getElementById("forward-button").onmousedown = function() {
 };
 
 document.getElementById("reverse-button").onmousedown = function() {
-    if (!forward) {
-        control_forward();
+    if (!reverse) {
+        control_reverse();
         reverse = true;
     }
 };
@@ -110,7 +110,7 @@ document.getElementById("right-button").ontouchstart = function() {
 };
 
 document.getElementById("reverse-button").ontouchstart = function() {
-    if (!right) {
+    if (!reverse) {
         control_reverse();
         reverse = true;
     }
@@ -148,7 +148,7 @@ document.onkeydown = function(e) {
     }
         else if (e.keyCode == '40') {
         // down arrow
-        if (!right) {
+        if (!reverse) {
             control_reverse();
             reverse = true;
         }
@@ -170,11 +170,11 @@ document.onkeyup = function(e) {
     }
     
         else if (e.keyCode == '40') {
-        // right arrow
+        // down arrow
         reverse = false;
     }
     
-    if (!left && !forward && !right) {
+    if (!left && !forward && !right && !reverse) {
         control_stop();
     }
 };
