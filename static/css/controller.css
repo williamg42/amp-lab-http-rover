@@ -18,6 +18,11 @@
     left: 180px;
 }
 
+#reverse-button-container {
+    bottom: 0;
+    left: 180px;
+}
+
 #left-button-container {
     top: 120px;
     left: 0;
