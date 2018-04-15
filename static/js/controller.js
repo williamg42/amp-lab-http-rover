@@ -6,6 +6,15 @@ var control_forward = function() {
     document.getElementById("forward-button").style.backgroundColor = "rgb(234, 250, 241)";
 };
 
+var control_reverse = function() {
+    var r = new XMLHttpRequest();
+    r.open("GET", "/api/control/reverse");
+    r.send();
+    reset_color();
+    document.getElementById("reverse-button").style.backgroundColor = "rgb(234, 250, 241)";
+};
+
+
 var control_left = function() {
     var r = new XMLHttpRequest();
     r.open("GET", "/api/control/left");
@@ -35,16 +44,25 @@ var reset_color = function() {
     document.getElementById("left-button").style.backgroundColor = "white";
     document.getElementById("right-button").style.backgroundColor = "white";
     document.getElementById("stop-button").style.backgroundColor = "white";
+    document.getElementById("reverse-button").style.backgroundColor = "white";
 };
 
 var forward = false;
 var left = false;
 var right = false;
+var reverse = false;
 
 document.getElementById("forward-button").onmousedown = function() {
     if (!forward) {
         control_forward();
         forward = true;
+    }
+};
+
+document.getElementById("reverse-button").onmousedown = function() {
+    if (!forward) {
+        control_forward();
+        reverse = true;
     }
 };
 
@@ -66,6 +84,7 @@ document.onmouseup = function() {
     forward = false;
     left = false;
     right = false;
+    reverse = false;
     control_stop();
 };
 
@@ -90,10 +109,18 @@ document.getElementById("right-button").ontouchstart = function() {
     }
 };
 
+document.getElementById("reverse-button").ontouchstart = function() {
+    if (!right) {
+        control_reverse();
+        reverse = true;
+    }
+};
+
 document.ontouchend = function() {
     forward = false;
     left = false;
     right = false;
+    reverse = false;
     control_stop();
 };
 
@@ -119,6 +146,13 @@ document.onkeydown = function(e) {
             right = true;
         }
     }
+        else if (e.keyCode == '40') {
+        // down arrow
+        if (!right) {
+            control_reverse();
+            reverse = true;
+        }
+    }
 };
 
 document.onkeyup = function(e) {
@@ -134,6 +168,12 @@ document.onkeyup = function(e) {
         // right arrow
         right = false;
     }
+    
+        else if (e.keyCode == '40') {
+        // right arrow
+        reverse = false;
+    }
+    
     if (!left && !forward && !right) {
         control_stop();
     }
