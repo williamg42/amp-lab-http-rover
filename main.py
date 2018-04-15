@@ -33,6 +33,8 @@ def controller():
 def api_control(direction=None):
     if direction == 'forward':
         controller.forward()
+    elif direction == 'reverse':
+        controller.reverse()
     elif direction == 'left':
         controller.left()
     elif direction == 'right':
@@ -45,12 +47,12 @@ def api_control(direction=None):
 
 def main():
 
-    if len(sys.argv) != 3:
-        print('Usage: python main.py [left_motor_pin_number] [right_motor_pin_number]')
+    if len(sys.argv) != 5:
+        print('Usage: python main.py [left_motor_pin_number_forward] [right_motor_pin_number_forward] [left_motor_pin_number_reverse] [right_motor_pin_number_reverse] ')
     else:
         try:
             global controller
-            controller = MotorController(int(sys.argv[1]), int(sys.argv[2]))
+            controller = MotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
             #controller = MockMotorController(int(sys.argv[1]), int(sys.argv[2]))
             run(host='0.0.0.0', port=8000, debug=True)
         except ValueError:
