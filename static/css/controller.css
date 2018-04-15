@@ -1,6 +1,6 @@
 #control-panel-container {
     position: absolute;
-    width: 360px;
+    width: 540px;
     height: 360px;
     top: 40%;
     left: 50%;
@@ -15,7 +15,7 @@
 
 #forward-button-container {
     top: 0;
-    left: 90px;
+    left: 180px;
 }
 
 #left-button-container {
@@ -29,8 +29,8 @@
 }
 
 #stop-button-container {
-    bottom: 0;
-    left: 90px;
+    top: 120px;
+    left: 180px;
 }
 
 .control-button {
