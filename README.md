@@ -20,23 +20,23 @@ vi /etc/opkg.conf
 - delete line ‘option check_signature 1'
 
 
--Download the repository
+- Download the repository
 ```
 wget --no-check-certificate https://github.com/williamg42/amp-lab-http-rover/archive/master.tar.gz
 tar -xvzf master.tar.gz
 ```
 
--Navigate into the directory
+- Navigate into the directory
  ```
 cd amp-lab-http-rover
 ```
 
--Run the install script
+- Run the install script
 ```
 sh ./install.sh
 ```
 
--start Python:
+- start Python:
 ```
 python main.py [left_motor_pin] [right_motor_pin]
 ```
