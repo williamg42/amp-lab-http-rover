@@ -17,22 +17,11 @@ One that is done, follow the following procedure.
 vi /etc/opkg.conf
 ```
 — delete line ‘option check_signature 1'
-```
-opkg update
-mkdir -p /home/bottle
-cd /home/bottle
-wget --no-check-certificate https://github.com/defnull/bottle/raw/master/bottle.py
-opkg install python-light
-opkg install python-email
-opkg install python-codecs
-opkg install python-logging
-opkg install python-openssl
-opkg install pyOnionGpio
 
-wget --no-check-certificate https://github.com/williamg42/amp-lab-http-rover/archive/master.tar.gz
-tar -xvzf master.tar.gz
+Run the install script
 ```
--Copy bottle.py into the new directory
+sh ./install.sh
+```
 - Navigate into the directory and start Python:
 ```
 cd amp-lab-http-rover
