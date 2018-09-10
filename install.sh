@@ -10,7 +10,7 @@ opkg install pyOnionGpio
 
 cd /amp-lab-http-rover
 wget --no-check-certificate https://github.com/defnull/bottle/raw/master/bottle.py
-chmod +x /root/amp-lab-http-rover/run_server.sh
-chmod +x /root/amp-lab-http-rover/collisionflash.sh
+chmod +x ./run_server.sh
+chmod +x ./collisionflash.sh
 
 
