@@ -7,8 +7,8 @@ opkg install python-codecs
 opkg install python-logging
 opkg install python-openssl
 opkg install pyOnionGpio
-
-cd /amp-lab-http-rover
+rm -r master.tar.gz
+cd root/amp-lab-http-rover-master/
 wget --no-check-certificate https://github.com/defnull/bottle/raw/master/bottle.py
 chmod +x ./run_server.sh
 chmod +x ./collisionflash.sh
