@@ -1,0 +1,5 @@
+# Put your custom commands here that should be excuted once
+# the system init finishes. By default this file does nothing
+sh /root/amp-lab-http-rover-master/collisionflash.sh
+sh /root/amp-lab-http-rover-master/run_server.sh
+ exit 0
