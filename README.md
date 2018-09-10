@@ -38,7 +38,7 @@ sh ./install.sh
 
 - start Python:
 ```
-python main.py [left_motor_pin] [right_motor_pin]
+python main.py [left_motor_pin_forward] [right_motor_pin_forward] [left_motor_pin_reverse] [right_motor_pin_reverse]
 ```
 Where `left_motor_pin` and `right_motor_pin` are substituted with the correct values.
 
