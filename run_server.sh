@@ -5,4 +5,4 @@ gpioctl dirout-low 19
 gpioctl dirout-low 18
 gpioctl dirout-low 16
 gpioctl dirout-low 15
-python ./main.py 19 15 18 16 
+python ./main.py 15 19 16 18 
