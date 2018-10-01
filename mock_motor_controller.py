@@ -15,3 +15,6 @@ class MockMotorController:
 
     def stop(self):
         print('stop')
+    
+    def reverse(self):
+        print('reverse')

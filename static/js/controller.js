@@ -39,6 +39,21 @@ var control_stop = function() {
     document.getElementById("stop-button").style.backgroundColor = "rgb(242, 243, 244)";
 };
 
+var control_calibration = function() {
+    
+    var slider = document.getElementById("motor-calibration");
+    var slider_value = slider.value; // Display the default slider value
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function() {
+        var slider_value = this.value;
+        console.log('slider changed');
+    }
+    var r = new XMLHttpRequest();
+    r.open("GET", "/api/control/calibrate/" + slider_value);
+    r.send();
+};
+
 var reset_color = function() {
     document.getElementById("forward-button").style.backgroundColor = "white";
     document.getElementById("left-button").style.backgroundColor = "white";
@@ -78,6 +93,10 @@ document.getElementById("right-button").onmousedown = function() {
         control_right();
         right = true;
     }
+};
+
+document.getElementById("motor-calibration").onmousedown = function() {
+        control_calibration();
 };
 
 document.onmouseup = function() {
