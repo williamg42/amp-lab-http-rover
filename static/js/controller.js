@@ -42,16 +42,17 @@ var control_stop = function() {
 var control_calibration = function() {
     
     var slider = document.getElementById("motor-calibration");
-    var slider_value = slider.value; // Display the default slider value
+    //var slider_value = slider.value; // Display the default slider value
 
     // Update the current slider value (each time you drag the slider handle)
     slider.oninput = function() {
         var slider_value = this.value;
-        console.log('slider changed');
+        var r = new XMLHttpRequest();
+        r.open("GET", "/api/control/calibrate/" + slider_value);
+        r.send();
+        
     }
-    var r = new XMLHttpRequest();
-    r.open("GET", "/api/control/calibrate/" + slider_value);
-    r.send();
+   
 };
 
 var reset_color = function() {
@@ -144,28 +145,28 @@ document.ontouchend = function() {
 };
 
 document.onkeydown = function(e) {
-    if (e.keyCode == '37') {
+    if (e.keyCode == '65') {
         // left arrow
         if (!left) {
             control_left();
             left = true;
         }
     }
-    else if (e.keyCode == '38') {
+    else if (e.keyCode == '87') {
         // up arrow
         if (!forward) {
             control_forward();
             forward = true;
         }
     }
-    else if (e.keyCode == '39') {
+    else if (e.keyCode == '68') {
         // right arrow
         if (!right) {
             control_right();
             right = true;
         }
     }
-        else if (e.keyCode == '40') {
+        else if (e.keyCode == '83') {
         // down arrow
         if (!reverse) {
             control_reverse();
@@ -175,20 +176,20 @@ document.onkeydown = function(e) {
 };
 
 document.onkeyup = function(e) {
-    if (e.keyCode == '37') {
+    if (e.keyCode == '65') {
         // left arrow
         left = false;
     }
-    else if (e.keyCode == '38') {
+    else if (e.keyCode == '87') {
         // up arrow
         forward = false;
     }
-    else if (e.keyCode == '39') {
+    else if (e.keyCode == '68') {
         // right arrow
         right = false;
     }
     
-        else if (e.keyCode == '40') {
+        else if (e.keyCode == '83') {
         // down arrow
         reverse = false;
     }

@@ -1,12 +1,13 @@
 import sys
-
-from motor_controller import MotorController
-#from mock_motor_controller import MockMotorController
+#from motor_controller import MotorController
+from mock_motor_controller import MockMotorController
 
 from bottle import route, run, Bottle
 from bottle import template
 
 from bottle import get, static_file
+
+value = 50
 
 # Static Routes
 @get("/static/css/<filepath:re:.*\.css>")
@@ -45,6 +46,11 @@ def api_control(direction=None):
         return ('')
     return ('')
 
+@route('/api/control/calibrate/<value>')
+def api_control(value=None):
+    controller.calibrate(value)
+    return ('')
+
 def main():
 
     if len(sys.argv) != 5:
@@ -52,8 +58,8 @@ def main():
     else:
         try:
             global controller
-            controller = MotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
-            #controller = MockMotorController(int(sys.argv[1]), int(sys.argv[2]))
+            #controller = MotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
+            controller = MockMotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
             run(host='0.0.0.0', port=8000, debug=True)
         except ValueError:
             print('Unable to parse command line arguments.')

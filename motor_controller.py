@@ -2,7 +2,7 @@ from onionGpio import OnionGpio
 
 class MotorController:
 
-    def __init__(self, left_motor_pin_f, right_motor_pin_f, left_motor_pin_r, right_motor_pin_r):
+    def __init__(self, left_motor_pin_f, right_motor_pin_f, left_motor_pin_r, right_motor_pin_r, motor_calibrate):
         self.left_motor_f = OnionGpio(left_motor_pin_f)
         self.right_motor_f = OnionGpio(right_motor_pin_f)
         self.left_motor_r = OnionGpio(left_motor_pin_r)
@@ -11,6 +11,7 @@ class MotorController:
         self.right_motor_f.setOutputDirection(0)
         self.left_motor_r.setOutputDirection(0)
         self.right_motor_r.setOutputDirection(0)
+        self.motor_calibrate = 50
 
     def forward(self):
         self.left_motor_f.setValue(1)
