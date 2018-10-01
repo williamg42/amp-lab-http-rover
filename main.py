@@ -7,7 +7,6 @@ from bottle import template
 
 from bottle import get, static_file
 
-value = 50
 
 # Static Routes
 @get("/static/css/<filepath:re:.*\.css>")
