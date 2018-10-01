@@ -13,12 +13,6 @@ One that is done, follow the following procedure.
 
 - Connect to your Onion device over WiFi.
 
-```
-vi /etc/opkg.conf
-```
-
-- delete line ‘option check_signature 1'
-
 
 - Download the repository
 ```
