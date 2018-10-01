@@ -13,12 +13,6 @@ One that is done, follow the following procedure.
 
 - Connect to your Onion device over WiFi.
 
-```
-vi /etc/opkg.conf
-```
-
-- delete line ‘option check_signature 1'
-
 
 - Download the repository
 ```
@@ -44,7 +38,7 @@ Where `left_motor_pin` and `right_motor_pin` are substituted with the correct va
 
 ## Usage
 
-Navigate to port 80 of the IP address of the Onion device in a web browser. Your URL should resemble the follwoing: `http://192.168.0.1:8000`.
+Navigate to port 8000 of the IP address of the Onion device in a web browser. Your URL should resemble the following: `http://192.168.3.1:8000`.
 
 If the web page loads, you are good to go!
 
