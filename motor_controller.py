@@ -1,8 +1,8 @@
-
+import subprocess
 
 class MotorController:
 
-    def __init__(self, left_motor_pin_f, right_motor_pin_f, left_motor_pin_r, right_motor_pin_r, motor_calibrate):
+    def __init__(self, left_motor_pin_f, right_motor_pin_f, left_motor_pin_r, right_motor_pin_r):
         self.left_motor_f = (left_motor_pin_f)
         self.right_motor_f = (right_motor_pin_f)
         self.left_motor_r = (left_motor_pin_r)
@@ -14,12 +14,12 @@ class MotorController:
         print('forward')
         print(self._motor_calibrate_l)
         print(self._motor_calibrate_r)
-        subprocess.call(['fast-gpio', 'pwm', str(self.left_motor_f), str(200), str(100)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.right_motor_f), str(200), str(100)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.left_motor_r), str(0)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.right_motor_r), str(0)])
+        subprocess.call(["fast-gpio", "pwm", str(self.left_motor_f), str(200), str(100)])
+        subprocess.call(["fast-gpio", "pwm", str(self.right_motor_f), str(200), str(100)])
+        subprocess.call(["fast-gpio", str(self.left_motor_r), str(0)])
+        subprocess.call(["fast-gpio", str(self.right_motor_r), str(0)])
 
-     def calibrate(self, v):
+    def calibrate(self, v):
         print('it works')
         print(v)
         if int(v) > 100: #slow down right wheel
@@ -33,31 +33,31 @@ class MotorController:
 
     def left(self):
         print('left')
-        subprocess.call(['fast-gpio', 'pwm', str(self.left_motor_f), str(0)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.right_motor_f), str(200), str(100)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.left_motor_r), str(0)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.right_motor_r), str(0)])
+        subprocess.call(["fast-gpio", str(self.left_motor_f), str(0)])
+        subprocess.call(["fast-gpio", "pwm", str(self.right_motor_f), str(200), str(100)])
+        subprocess.call(["fast-gpio", str(self.left_motor_r), str(0)])
+        subprocess.call(["fast-gpio", str(self.right_motor_r), str(0)])
 
 
     def right(self):
         print('right')
-        subprocess.call(['fast-gpio', 'pwm', str(self.left_motor_f), str(0), str(100)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.right_motor_f), str(0)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.left_motor_r), str(0)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.right_motor_r), str(0)])
+        subprocess.call(["fast-gpio", "pwm", str(self.left_motor_f), str(200), str(100)])
+        subprocess.call(["fast-gpio", str(self.right_motor_f), str(0)])
+        subprocess.call(["fast-gpio", str(self.left_motor_r), str(0)])
+        subprocess.call(["fast-gpio", str(self.right_motor_r), str(0)])
 
     def stop(self):
         print('stop')
 
-        subprocess.call(['fast-gpio', 'pwm', str(self.left_motor_f), str(0)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.right_motor_f), str(0)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.left_motor_r), str(0)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.right_motor_r), str(0)])
+        subprocess.call(["fast-gpio", str(self.left_motor_f), str(0)])
+        subprocess.call(["fast-gpio", str(self.right_motor_f), str(0)])
+        subprocess.call(["fast-gpio", str(self.left_motor_r), str(0)])
+        subprocess.call(["fast-gpio", str(self.right_motor_r), str(0)])
 
     
     def reverse(self):
         print('reverse')
-        subprocess.call(['fast-gpio', 'pwm', str(self.left_motor_r), str(200), str(100)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.right_motor_r), str(200), str(100)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.left_motor_f), str(0)])
-        subprocess.call(['fast-gpio', 'pwm', str(self.right_motor_f), str(0)])
+        subprocess.call(["fast-gpio", "pwm", str(self.left_motor_r), str(200), str(100)])
+        subprocess.call(["fast-gpio", "pwm", str(self.right_motor_r), str(200), str(100)])
+        subprocess.call(["fast-gpio", str(self.left_motor_f), str(0)])
+        subprocess.call(["fast-gpio", str(self.right_motor_f), str(0)])
