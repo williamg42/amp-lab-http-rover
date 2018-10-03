@@ -1,13 +1,13 @@
 import os
 
-class MotorController:
-    
-    def pwmMotor(pin, frequency, dutyCyclePercentage):
+def pwmMotor(pin, frequency, dutyCyclePercentage):
 	# create a string to hold our command line code,assign the function arguments to fast-gpio command arguments
     command = "fast-gpio pwm %d %d %d" % (pin, frequency, dutyCyclePercentage)
 	# execute the command using the OS
-	os.system(command)
+    os.system(command)
 
+class MotorController:
+    
     def __init__(self, left_motor_pin_f, right_motor_pin_f, left_motor_pin_r, right_motor_pin_r):
         self.left_motor_f = (left_motor_pin_f)
         self.right_motor_f = (right_motor_pin_f)
@@ -31,7 +31,7 @@ class MotorController:
         print(v)
         if int(v) > 100: #slow down right wheel
             self._motor_calibrate_r = 100-(int(v)-100)
-           self._motor_calibrate_l = 100
+            self._motor_calibrate_l = 100
         else:
              self._motor_calibrate_l = 100-(100-int(v)) 
              self._motor_calibrate_r = 100  
@@ -65,5 +65,5 @@ class MotorController:
         print('reverse')
         pwmMotor(self.left_motor_f, 200, 0)
         pwmMotor(self.right_motor_f, 200, 0)
-        pwmMotor(self.left_motor_r, 200, 100)
-        pwmMotor(self.right_motor_r, 200, 100)
+        pwmMotor(self.left_motor_r, 200, self._motor_calibrate_r)
+        pwmMotor(self.right_motor_r, 200, self._motor_calibrate_l)
