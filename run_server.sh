@@ -12,4 +12,4 @@ fast-gpio set-output 15
 
 
 
-python ./main.py 15 19 16 18 
+python ./main.py 19 15 18 16 
