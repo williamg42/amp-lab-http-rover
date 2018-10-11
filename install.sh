@@ -14,5 +14,6 @@ chmod +x ./run_server.sh
 chmod +x ./collisionflash.sh
 rm -r /etc/rc.local
 cp ./rc.local /etc/rc.local
-
+rm -r /etc/dnsmasq.conf
+cp ./dnsmasq.conf /etc/dnsmasq.conf
 
