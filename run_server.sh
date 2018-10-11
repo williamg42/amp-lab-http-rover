@@ -11,5 +11,7 @@ fast-gpio set-output 16
 fast-gpio set-output 15
 
 
+iptables -t nat -I PREROUTING --src 0/0 --dst 192.168.3.1 -p tcp --dport 80 -j REDIRECT --to-ports 8000
+
 
 python ./main.py 19 15 18 16 
