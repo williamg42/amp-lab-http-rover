@@ -39,19 +39,19 @@ Where `left_motor_pin` and `right_motor_pin` are substituted with the correct va
 ## Usage
 On a Laptop:
 
-Connect to omega's wifi: `OMEGA-XXXX`
+- Connect to omega's wifi: `OMEGA-XXXX`
 
-Open a web browser
+- Open a web browser
 
-go to `www.rover.control`
+- go to `www.rover.control`
 
-On a Phone/Tablet:
+- On a Phone/Tablet:
 
-Connect to omega's wifi: `OMEGA-XXXX`
+- Connect to omega's wifi: `OMEGA-XXXX`
 
-Open a web browser
+- Open a web browser
 
-go to `http://192.168.3.1:8000`
+- go to `http://192.168.3.1:8000`
 
 
 If the web page loads, you are good to go!
