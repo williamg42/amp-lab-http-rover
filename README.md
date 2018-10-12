@@ -30,11 +30,11 @@ cd amp-lab-http-rover
 sh ./install.sh
 ```
 
-- start Python:
+- start the webserver:
 ```
-python main.py [left_motor_pin_forward] [right_motor_pin_forward] [left_motor_pin_reverse] [right_motor_pin_reverse]
+sh ./run_server.sh
 ```
-Where `left_motor_pin` and `right_motor_pin` are substituted with the correct values.
+The server also automatically starts on boot
 
 ## Usage
 On a Laptop:
