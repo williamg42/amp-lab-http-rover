@@ -45,7 +45,8 @@ On a Laptop:
 
 - go to `www.rover.control`
 
-- On a Phone/Tablet:
+
+On a Phone/Tablet:
 
 - Connect to omega's wifi: `OMEGA-XXXX`
 
