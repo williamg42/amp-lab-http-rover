@@ -43,7 +43,7 @@ On a Laptop:
 
 - Open a web browser
 
-- go to `www.rover.control`
+- go to `www.rover.io`
 
 
 On a Phone/Tablet:
