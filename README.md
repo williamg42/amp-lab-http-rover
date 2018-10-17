@@ -44,12 +44,12 @@ The server also automatically starts on boot
 
 On a Chrome:
 
-- go to `www.rover.io:8000`
+- go to `www.rovercontrol.io:8000`
 
 
 On anything else:
 
-- go to `www.rover.io`
+- go to `www.rovercontrol.io`
 
 If the web page loads, you are good to go!
 
