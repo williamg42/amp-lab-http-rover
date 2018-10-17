@@ -40,6 +40,8 @@ The server also automatically starts on boot
 
 - Connect to omega's wifi: `OMEGA-XXXX`
 
+-Password: `12345678`
+
 - Open a web browser
 
 On a Chrome:
