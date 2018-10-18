@@ -9,6 +9,9 @@ class MockMotorController:
         self.right_motor_r = (right_motor_pin_r)
         self._motor_calibrate_l = 100
         self._motor_calibrate_r = 100
+        self._xvalue = 0
+        self._yvalue = 0
+
    
 
     def forward(self):
@@ -20,16 +23,22 @@ class MockMotorController:
         #subprocess.call(['fast-gpio', 'pwm', str(self.left_motor_r), str(0)])
         #subprocess.call(['fast-gpio', 'pwm', str(self.right_motor_r), str(0)])
 
-    def calibrate(self, v):
+    def calibratex(self, v1):
         print('it works')
-        print(v)
-        if int(v) > 100: #slow down right wheel
-            self._motor_calibrate_r = 100-(int(v)-100)
-            self._motor_calibrate_l = 100
+        print(v1)
+        if float(v1) > 0: #slow down right wheel
+            self._motor_calibrate_r = float(self._xvalue)-(float(v1))
+            self._motor_calibrate_l = float(self._xvalue)
         else:
-             self._motor_calibrate_l = 100-(100-int(v)) 
-             self._motor_calibrate_r = 100  
-         
+             self._motor_calibrate_l = float(self._xvalue)+(float(v1)) 
+             self._motor_calibrate_r = float(self._xvalue)  
+
+    def calibratey(self, v2):
+        print('it works')
+        print(v2)
+        self._xvalue = float(v2)
+                     
+
 
 
     def left(self):

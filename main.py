@@ -45,10 +45,17 @@ def api_control(direction=None):
         return ('')
     return ('')
 
-@route('/api/control/calibrate/<value>')
+@route('/api/control/calibratey/<value>')
 def api_control(value=None):
-    controller.calibrate(value)
+    controller.calibratey(value)
     return ('')
+
+@route('/api/control/calibratex/<value>')
+def api_control(value=None):
+    controller.calibratex(value)
+    return ('')
+
+
 
 def main():
 
