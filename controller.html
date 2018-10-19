@@ -55,10 +55,14 @@
             joystick.addEventListener('onTouchMove', function(){
 				console.log('moved')
 			})
+		
+            joystick.addEventListener('onMouseMove', function(){
+				console.log('moved')
+			})
             
    
             setInterval(function(){
-                var outputEl    = document.getElementById('result');
+              <!--  var outputEl    = document.getElementById('result');
                 var r = new XMLHttpRequest();
                 r.open("GET", "/api/control/calibratex/" + (joystick.deltaX()));
                 r.send();
@@ -67,7 +71,7 @@
                 r2.send();
                 var r3 = new XMLHttpRequest();
                 r3.open("GET", "/api/control/drive");
-                r3.send();
+                r3.send(); -->
 
                 outputEl.innerHTML  = '<b>Result:</b> '
                     + ' dx:'+joystick.deltaX()
