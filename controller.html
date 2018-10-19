@@ -52,6 +52,10 @@
                 stickRadius: 100
             });
             
+            joystick.addEventListener('onMove', function(){
+				console.log('moved')
+			})
+            
    
             setInterval(function(){
                 var outputEl    = document.getElementById('result');
