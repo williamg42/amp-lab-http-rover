@@ -424,4 +424,4 @@ VirtualJoystick.prototype._check3D = function()
 	return exports;
 }
 
-module.exports = VirtualJoystick;
+
