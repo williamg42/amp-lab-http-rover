@@ -29,24 +29,6 @@ def js(filepath):
 def controller():
     return template('controller.html')
 
-@route('/api/control/<direction>')
-def api_control(direction=None):
-    if direction == 'forward':
-        controller.forward()
-    elif direction == 'reverse':
-        controller.reverse()
-    elif direction == 'left':
-        controller.left()
-    elif direction == 'right':
-        controller.right()
-    elif direction == 'stop':
-        controller.stop()
-    elif direction == 'drive':
-        controller.drive()
-    else:
-        return ('')
-    return ('')
-
 @route('/api/control/calibratey/<value>')
 def api_control(value=None):
     controller.calibratey(value)
