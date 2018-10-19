@@ -7,8 +7,8 @@ opkg install python-codecs
 opkg install python-logging
 opkg install python-openssl
 opkg install pyOnionGpio
-rm -r /root/master.tar.gz
-cd root/amp-lab-http-rover-master/
+rm -r /root/Joystick.tar.gz
+cd root/amp-lab-http-rover-Joystick/
 wget --no-check-certificate https://github.com/defnull/bottle/raw/master/bottle.py
 chmod +x ./run_server.sh
 chmod +x ./collisionflash.sh
