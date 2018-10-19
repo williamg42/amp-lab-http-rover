@@ -41,8 +41,8 @@ class MotorController:
    
 
 
-        print(R)
-        print(L)
+        #print(R)
+        #print(L)
 
         if R < 0: #if robot is going forward
 
@@ -74,8 +74,8 @@ class MotorController:
         self._xvalue = (round(float(v1)))
 
     def calibratey(self, v2):
-        print('it works')
-        print(v2)
+        #print('it works')
+        #print(v2)
         self._yvalue = (round(float(v2)))
                      
 
