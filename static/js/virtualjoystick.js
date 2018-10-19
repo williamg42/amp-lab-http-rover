@@ -292,7 +292,7 @@ VirtualJoystick.prototype._onTouchMove	= function(event)
 {
 	// if there is no touch in progress, do nothing
 	if( this._touchIdx === null )	return;
-
+	this.dispatchEvent('touchMove', event);
 	// try to find our touch event
 	var touchList	= event.changedTouches;
 	for(var i = 0; i < touchList.length && touchList[i].identifier !== this._touchIdx; i++ );
