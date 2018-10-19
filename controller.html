@@ -52,20 +52,14 @@
                 stickRadius: 100
             });
             
-            joystick.addEventListener('touchStart', function(){
-                
-            })
-            joystick.addEventListener('touchEnd', function(){
-                
-            })
    
             setInterval(function(){
                 var outputEl    = document.getElementById('result');
                 var r = new XMLHttpRequest();
-                r.open("GET", "/api/control/calibratex/" + round(joystick.deltaX()));
+                r.open("GET", "/api/control/calibratex/" + (joystick.deltaX()));
                 r.send();
                 var r2 = new XMLHttpRequest();
-                r2.open("GET", "/api/control/calibratey/" + round(joystick.deltaY()));
+                r2.open("GET", "/api/control/calibratey/" + (joystick.deltaY()));
                 r2.send();
                 var r3 = new XMLHttpRequest();
                 r3.open("GET", "/api/control/drive");
