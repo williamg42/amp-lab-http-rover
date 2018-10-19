@@ -51,26 +51,14 @@
                 limitStickTravel: true,
                 stickRadius: 100
             });
-            joystick.addEventListener('touchStart', function(){
-                console.log('down')
-            })
-            joystick.addEventListener('touchEnd', function(){
-                console.log('up')
-            })
 
-                      joystick.addEventListener('mouseup', function(){
-                console.log('down')
-            })
-            joystick.addEventListener('mousedown', function(){
-                console.log('up')
-            })
             setInterval(function(){
                 var outputEl    = document.getElementById('result');
                 var r = new XMLHttpRequest();
-                r.open("GET", "/api/control/calibratex/" + joystick.deltaX());
+                r.open("GET", "/api/control/calibratex/" + round(joystick.deltaX()));
                 r.send();
                 var r2 = new XMLHttpRequest();
-                r2.open("GET", "/api/control/calibratey/" + joystick.deltaY());
+                r2.open("GET", "/api/control/calibratey/" + round(joystick.deltaY()));
                 r2.send();
                 var r3 = new XMLHttpRequest();
                 r3.open("GET", "/api/control/drive");
@@ -83,7 +71,7 @@
                     + (joystick.up()    ? ' up'     : '')
                     + (joystick.left()  ? ' left'   : '')
                     + (joystick.down()  ? ' down'   : '')   
-            }, 250);
+            }, 33);
         </script>
     </body>
 </html>
