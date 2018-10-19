@@ -41,6 +41,8 @@ def api_control(direction=None):
         controller.right()
     elif direction == 'stop':
         controller.stop()
+    elif direction == 'drive':
+        controller.drive()
     else:
         return ('')
     return ('')

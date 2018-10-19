@@ -73,7 +73,7 @@
                 r2.open("GET", "/api/control/calibratey/" + joystick.deltaY());
                 r2.send();
                 var r3 = new XMLHttpRequest();
-                r3.open("GET", "/api/control/forward/");
+                r3.open("GET", "/api/control/drive");
                 r3.send();
 
                 outputEl.innerHTML  = '<b>Result:</b> '
@@ -83,7 +83,7 @@
                     + (joystick.up()    ? ' up'     : '')
                     + (joystick.left()  ? ' left'   : '')
                     + (joystick.down()  ? ' down'   : '')   
-            }, 1/30 * 1000);
+            }, 100);
         </script>
     </body>
 </html>
