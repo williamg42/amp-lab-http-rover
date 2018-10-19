@@ -65,18 +65,6 @@
               
 	      var outputEl    = document.getElementById('result');
 		 
-<!-- 
-                var r = new XMLHttpRequest();
-                r.open("GET", "/api/control/calibratex/" + (joystick.deltaX()));
-                r.send();
-                var r2 = new XMLHttpRequest();
-                r2.open("GET", "/api/control/calibratey/" + (joystick.deltaY()));
-                r2.send();
-                var r3 = new XMLHttpRequest();
-                r3.open("GET", "/api/control/drive");
-                r3.send();
--->
-
                 outputEl.innerHTML  = '<b>Result:</b> '
                     + ' dx:'+joystick.deltaX()
                     + ' dy:'+joystick.deltaY()
