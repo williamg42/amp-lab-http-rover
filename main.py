@@ -35,7 +35,14 @@ def controller():
 
 @route('/api/control/drive/<value1>/<value2>')
 def api_control(value1=None, value2=None):
-    controller.update(value1, value2)
+    X =int(round(float(value1)))
+    Y = int(round(float(value2)))
+    V =(100-abs(X)) * (Y/100) + Y
+    W= (100-abs(Y)) * (X/100) + X
+    R = (V+W) /2
+    L= (V-W)/2
+    controller.Lg = L
+    controller.Rg = R
     return ('')
 
 @route('/api/control/move')

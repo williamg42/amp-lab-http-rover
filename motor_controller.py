@@ -13,50 +13,45 @@ class MotorController:
         self.right_motor_f = (right_motor_pin_f)
         self.left_motor_r = (left_motor_pin_r)
         self.right_motor_r = (right_motor_pin_r)
-	self.X = 0
-	self.Y = 0
+	self.Rg = 0
+	self.Lg = 0
 	
-    def update(self, Xin, Yin):
-	self.X = Xin
-	self.Y = Yin
-
   
     def drive(self):
-        
-        X =int(round(float(self.X)))
-        Y = int(round(float(self.Y)))
 
+        R = int(self.Rg)
+        L= int(self.Lg)
 
-        V =(100-abs(X)) * (Y/100) + Y
-        W= (100-abs(Y)) * (X/100) + X
-        R = (V+W) /2
-        L= (V-W)/2
-
-        print(R)
-        print(L)
+        #print(R)
+        #print(L)
    
 
 
         if R < 0: #if robot is going forward
 
-            pwmMotor(self.right_motor_f, 200, abs(R))
-            pwmMotor(self.right_motor_r, 200, 0)           
+            
+            command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 1000, abs(R))
+            command = command + "fast-gpio pwm %d %d %d" % (self.right_motor_r, 1000, 0)
+            os.system(command)
+            print(command)
+
 
         else: 
 
-            pwmMotor(self.right_motor_f, 200, 0)
-            pwmMotor(self.right_motor_r, 200, R)  
+            command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 1000, 0)
+            command = command + "fast-gpio pwm %d %d %d" % (self.right_motor_r, 1000, R)
+            os.system(command) 
 
 
         if L < 0: #if robot is going forward
-
-            pwmMotor(self.left_motor_f, 200, abs(L))
-            pwmMotor(self.left_motor_r, 200, 0)           
+            command = "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 1000, abs(L))
+            command = command + "fast-gpio pwm %d %d %d" % (self.left_motor_r, 1000, 0)
+            os.system(command)          
 
         else: 
 
-            pwmMotor(self.left_motor_f, 200, 0)
-            pwmMotor(self.left_motor_r, 200, L)  
-
+            command = "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 1000, 0)
+            command = command + "fast-gpio pwm %d %d %d" % (self.left_motor_r, 1000, L)
+            os.system(command)          
         
 
