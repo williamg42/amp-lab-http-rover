@@ -17,14 +17,17 @@ class MotorController:
   
     def drive(self, Xin, Yin):
         
-        X =Xin
-        Y = Yin
+        X =int(round(float(Xin)))
+        Y = int(round(float(Yin)))
 
 
         V =(100-abs(X)) * (Y/100) + Y
         W= (100-abs(Y)) * (X/100) + X
         R = (V+W) /2
         L= (V-W)/2
+
+        print(R)
+        print(L)
    
 
 

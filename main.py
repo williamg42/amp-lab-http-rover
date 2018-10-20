@@ -30,6 +30,13 @@ def controller():
     return template('controller.html')
 
 
+@route('/api/control/drive/<value1>/<value2>')
+def api_control(value1=None, value2=None):
+    controller.drive(value1, value2)
+    return ('')
+
+
+
 
 def main():
 

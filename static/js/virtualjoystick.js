@@ -14,6 +14,7 @@ var VirtualJoystick	= function(opts)
 	this._useCssTransform	= opts.useCssTransform !== undefined ? opts.useCssTransform : false
 
 	this._container.style.position	= "relative"
+	this._container.style['z-index'] = 100
 
 	this._container.appendChild(this._baseEl)
 	this._baseEl.style.position	= "absolute"
@@ -218,6 +219,7 @@ VirtualJoystick.prototype._onMove	= function(x, y)
 
 VirtualJoystick.prototype._onMouseUp	= function(event)
 {
+	this.dispatchEvent('touchEnd', event);
 	return this._onUp();
 }
 
@@ -226,6 +228,9 @@ VirtualJoystick.prototype._onMouseDown	= function(event)
 	event.preventDefault();
 	var x	= event.clientX;
 	var y	= event.clientY;
+
+	this.dispatchEvent('touchStart', event);
+
 	return this._onDown(x, y);
 }
 
@@ -233,6 +238,7 @@ VirtualJoystick.prototype._onMouseMove	= function(event)
 {
 	var x	= event.clientX;
 	var y	= event.clientY;
+	this.dispatchEvent('touchMove', event);
 	return this._onMove(x, y);
 }
 
@@ -292,8 +298,6 @@ VirtualJoystick.prototype._onTouchMove	= function(event)
 {
 	// if there is no touch in progress, do nothing
 	if( this._touchIdx === null )	return;
-	
-	this.dispatchEvent('touchMove', event);
 
 	// try to find our touch event
 	var touchList	= event.changedTouches;
@@ -303,6 +307,7 @@ VirtualJoystick.prototype._onTouchMove	= function(event)
 	var touch	= touchList[i];
 
 	event.preventDefault();
+	this.dispatchEvent('touchMove', event);
 
 	var x		= touch.pageX;
 	var y		= touch.pageY;

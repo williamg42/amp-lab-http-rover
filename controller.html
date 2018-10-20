@@ -1,78 +1,93 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        
-        <style>
-        body {
-            overflow    : hidden;
-            padding     : 0;
-            margin      : 0;
-            background-color: #BBB;
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <style>
+    body {
+        overflow    : hidden;
+        padding     : 0;
+        margin      : 0;
+        background-color: #BBB;
+    }
+    #info {
+        position    : absolute;
+        top     : 0px;
+        width       : 100%;
+        padding     : 5px;
+        text-align  : center;
+    }
+    #info a {
+        color       : #66F;
+        text-decoration : none;
+    }
+    #info a:hover {
+        text-decoration : underline;
+    }
+    #container {
+        width       : 100%;
+        height      : 100%;
+        overflow    : hidden;
+        padding     : 0;
+        margin      : 0;
+        -webkit-user-select : none;
+        -moz-user-select    : none;
+    }
+</style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="info">
+        <span id="result"></span>
+    </div> 
+    <script src="/static/js/virtualjoystick.js"></script>
+    <script>
+        console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
+
+        var joystick    = new VirtualJoystick({
+            container   : document.getElementById('container'),
+            mouseSupport    : true,
+            stationaryBase  : false,
+            limitStickTravel: true,
+            stickRadius: 100
+        });
+
+        function Senddata() {
+
+            var r = new XMLHttpRequest();
+            r.open("GET", "/api/control/drive/" + (joystick.deltaX()) + "/"+ (joystick.deltaY()));
+            r.send();
+
         }
-        #info {
-            position    : absolute;
-            top     : 0px;
-            width       : 100%;
-            padding     : 5px;
-            text-align  : center;
+
+                function Senddatazero() {
+
+            var r = new XMLHttpRequest();
+            r.open("GET", "/api/control/drive/" + (0) + "/" + (0));
+            r.send();
+
         }
-        #info a {
-            color       : #66F;
-            text-decoration : none;
-        }
-        #info a:hover {
-            text-decoration : underline;
-        }
-        #container {
-            width       : 100%;
-            height      : 100%;
-            overflow    : hidden;
-            padding     : 0;
-            margin      : 0;
-            -webkit-user-select : none;
-            -moz-user-select    : none;
-        }
-        </style>
-    </head>
-    <body>
-        <div id="container"></div>
-        <div id="info">
-            <span id="result"></span>
-        </div> 
-        <script src="/static/js/virtualjoystick.js"></script>
-        <script>
-            console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
-    
-            var joystick    = new VirtualJoystick({
-                container   : document.getElementById('container'),
-                mouseSupport    : true,
-                stationaryBase  : false,
-                limitStickTravel: true,
-                stickRadius: 100
-            });
-            
-            joystick.addEventListener('onTouchMove', function(){
-				console.log('moved')
-			});
-		
-            joystick.addEventListener('onMouseMove', function(){
-				console.log('moved')
-			});
-            
-   
-            setInterval(function(){
-              
-	      var outputEl    = document.getElementById('result');
-		 
-                outputEl.innerHTML  = '<b>Result:</b> '
-                    + ' dx:'+joystick.deltaX()
-                    + ' dy:'+joystick.deltaY()
-                    + (joystick.right() ? ' right'  : '')
-                    + (joystick.up()    ? ' up'     : '')
-                    + (joystick.left()  ? ' left'   : '')
-                    + (joystick.down()  ? ' down'   : '')   
-            }, 33);
-        </script>
-    </body>
+
+
+        joystick.addEventListener('touchMove', Senddata);
+        joystick.addEventListener('touchEnd', Senddatazero);
+
+
+
+
+
+        setInterval(function(){
+
+         var outputEl    = document.getElementById('result');
+
+         outputEl.innerHTML  = '<b>Result:</b> '
+         + ' dx:'+joystick.deltaX()
+         + ' dy:'+joystick.deltaY()
+         + (joystick.right() ? ' right'  : '')
+         + (joystick.up()    ? ' up'     : '')
+         + (joystick.left()  ? ' left'   : '')
+         + (joystick.down()  ? ' down'   : '')   
+     }, 33);
+ </script>
+</body>
 </html>
