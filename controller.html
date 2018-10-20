@@ -60,10 +60,18 @@
 
         }
 
-                function Senddatazero() {
+        function Senddatazero() {
 
             var r = new XMLHttpRequest();
             r.open("GET", "/api/control/drive/" + (0) + "/" + (0));
+            r.send();
+
+        }
+
+        function Sendmove() {
+
+            var r = new XMLHttpRequest();
+            r.open("GET", "/api/control/move");
             r.send();
 
         }
@@ -78,16 +86,18 @@
 
         setInterval(function(){
 
-         var outputEl    = document.getElementById('result');
+           var outputEl    = document.getElementById('result');
+           Sendmove()
 
-         outputEl.innerHTML  = '<b>Result:</b> '
-         + ' dx:'+joystick.deltaX()
-         + ' dy:'+joystick.deltaY()
-         + (joystick.right() ? ' right'  : '')
-         + (joystick.up()    ? ' up'     : '')
-         + (joystick.left()  ? ' left'   : '')
-         + (joystick.down()  ? ' down'   : '')   
-     }, 33);
- </script>
+
+           outputEl.innerHTML  = '<b>Result:</b> '
+           + ' dx:'+joystick.deltaX()
+           + ' dy:'+joystick.deltaY()
+           + (joystick.right() ? ' right'  : '')
+           + (joystick.up()    ? ' up'     : '')
+           + (joystick.left()  ? ' left'   : '')
+           + (joystick.down()  ? ' down'   : '')   
+       }, 150);
+   </script>
 </body>
 </html>

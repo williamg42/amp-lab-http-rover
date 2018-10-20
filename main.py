@@ -1,4 +1,7 @@
 import sys
+import threading
+import time
+
 from motor_controller import MotorController
 #from mock_motor_controller import MockMotorController
 
@@ -32,7 +35,12 @@ def controller():
 
 @route('/api/control/drive/<value1>/<value2>')
 def api_control(value1=None, value2=None):
-    controller.drive(value1, value2)
+    controller.update(value1, value2)
+    return ('')
+
+@route('/api/control/move')
+def api_control():
+    controller.drive()
     return ('')
 
 
@@ -48,6 +56,7 @@ def main():
             controller = MotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
             #controller = MockMotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
             run(host='0.0.0.0', port=8000, debug=True)
+
         except ValueError:
             print('Unable to parse command line arguments.')
 

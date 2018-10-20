@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-cd /root/amp-lab-http-rover-master/
+cd /root/amp-lab-http-rover-Joystick/
 gpioctl dirout-low 19
 gpioctl dirout-low 18
 gpioctl dirout-low 16
