@@ -20,7 +20,7 @@ tar -xvzf master.tar.gz
 
 - Navigate into the directory
  ```
-cd amp-lab-http-rover
+cd amp-lab-http-rover-master
 ```
 
 - Run the install script
