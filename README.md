@@ -14,13 +14,13 @@ One that is done, follow the following procedure.
 
 - Download the repository
 ```
-wget --no-check-certificate https://github.com/williamg42/amp-lab-http-rover/archive/master.tar.gz
-tar -xvzf master.tar.gz
+wget --no-check-certificate https://github.com/williamg42/amp-lab-http-rover/archive/Joystick.tar.gz
+tar -xvzf Joystick.tar.gz
 ```
 
 - Navigate into the directory
  ```
-cd amp-lab-http-rover
+cd amp-lab-http-rover-Joystick
 ```
 
 - Run the install script
