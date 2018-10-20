@@ -13,12 +13,18 @@ class MotorController:
         self.right_motor_f = (right_motor_pin_f)
         self.left_motor_r = (left_motor_pin_r)
         self.right_motor_r = (right_motor_pin_r)
+	self.X = 0
+	self.Y = 0
+	
+    def update(self, Xin, Yin):
+	self.X = Xin
+	self.Y = Yin
 
   
-    def drive(self, Xin, Yin):
+    def drive(self):
         
-        X =int(round(float(Xin)))
-        Y = int(round(float(Yin)))
+        X =int(round(float(self.X)))
+        Y = int(round(float(self.Y)))
 
 
         V =(100-abs(X)) * (Y/100) + Y
@@ -30,8 +36,6 @@ class MotorController:
         print(L)
    
 
-
-   
 
         if R < 0: #if robot is going forward
 
