@@ -44,6 +44,11 @@
     <script>
         console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
 
+        var currentxposition= 0;
+        var currentyposition= 0;
+        var pastxposition= 0;
+        var pastyposition= 0;
+
         var joystick    = new VirtualJoystick({
             container   : document.getElementById('container'),
             mouseSupport    : true,
@@ -55,7 +60,7 @@
         function Senddata() {
 
             var r = new XMLHttpRequest();
-            r.open("GET", "/api/control/drive/" + (joystick.deltaX()) + "/"+ (joystick.deltaY()));
+            r.open("GET", "/api/control/drive/" + Math.round(joystick.deltaX()) + "/"+ Math.round(joystick.deltaY()));
             r.send();
 
         }
@@ -77,27 +82,48 @@
         }
 
 
-        joystick.addEventListener('touchMove', Senddata);
-        joystick.addEventListener('touchEnd', Senddatazero);
-
-
-
-
 
         setInterval(function(){
 
            var outputEl    = document.getElementById('result');
-           Sendmove()
+
+           currentxposition = Math.round(joystick.deltaX())
+           currentyposition = Math.round(joystick.deltaY())
+           
+         
+            if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
+
+                pastyposition = currentyposition
+                pastxposition = currentxposition
+            
+            } 
+
+            else {
+
+                pastyposition = currentyposition
+                pastxposition = currentxposition
+
+            var r = new XMLHttpRequest();
+            r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
+            r.send();
+
+            var r = new XMLHttpRequest();
+            r.open("GET", "/api/control/move");
+            r.send();
+
+            
+            }
+
 
 
            outputEl.innerHTML  = '<b>Result:</b> '
-           + ' dx:'+joystick.deltaX()
-           + ' dy:'+joystick.deltaY()
+           + ' dx:'+Math.round(joystick.deltaX())
+           + ' dy:'+Math.round(joystick.deltaY())
            + (joystick.right() ? ' right'  : '')
            + (joystick.up()    ? ' up'     : '')
            + (joystick.left()  ? ' left'   : '')
            + (joystick.down()  ? ' down'   : '')   
-       }, 250);
+       }, 100);
    </script>
 </body>
 </html>
