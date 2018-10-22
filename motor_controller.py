@@ -31,34 +31,34 @@ class MotorController:
         if R < 0 && L < 0: #if robot is going forward
 
             
-            command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 100, abs(R))
-            command = command + "fast-gpio pwm %d %d %d &&" % (self.right_motor_r, 100, 0)
-            command = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 100, abs(L))
-            command = command + "fast-gpio pwm %d %d %d &" % (self.left_motor_r, 100, 0)
+            command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, abs(R))
+            command = command + "fast-gpio pwm %d %d %d &&" % (self.right_motor_r, 50, 0)
+            command = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, abs(L))
+            command = command + "fast-gpio pwm %d %d %d &" % (self.left_motor_r, 50, 0)
             os.system(command)
            
 
 
         elif R >= 0 && L < 0: 
 
-            command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 100, 0)
-            command = command + "fast-gpio pwm %d %d %d && " % (self.right_motor_r, 100, R)
-            command = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 100, abs(L))
-            command = command + "fast-gpio pwm %d %d %d &" % (self.left_motor_r, 100, 0)
+            command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, 0)
+            command = command + "fast-gpio pwm %d %d %d && " % (self.right_motor_r, 50, R)
+            command = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, abs(L))
+            command = command + "fast-gpio pwm %d %d %d &" % (self.left_motor_r, 50, 0)
             os.system(command) 
 
 
         elif R < 0 && L >= 0: #if robot is going forward
-            command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 100, abs(R))
-            command = command + "fast-gpio pwm %d %d %d &&" % (self.right_motor_r, 100, 0)
-             ommand = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 100, 0)
-            command = command + "fast-gpio pwm %d %d %d &" % (self.left_motor_r, 100, L)           
+            command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, abs(R))
+            command = command + "fast-gpio pwm %d %d %d &&" % (self.right_motor_r, 50, 0)
+             ommand = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, 0)
+            command = command + "fast-gpio pwm %d %d %d &" % (self.left_motor_r, 50, L)           
             os.system(command)          
 
         else: 
 
-            command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 100, 0)
-            command = command + "fast-gpio pwm %d %d %d &&" % (self.right_motor_r, 100, R)
-             ommand = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 100, 0)
-            command = command + "fast-gpio pwm %d %d %d &" % (self.left_motor_r, 100, L)           
+            command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, 0)
+            command = command + "fast-gpio pwm %d %d %d &&" % (self.right_motor_r, 50, R)
+             ommand = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, 0)
+            command = command + "fast-gpio pwm %d %d %d &" % (self.left_motor_r, 50, L)           
             os.system(command) 
