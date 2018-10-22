@@ -82,6 +82,9 @@
         }
 
 
+        joystick.addEventListener('touchEnd', Senddatazero);
+
+
 
         setInterval(function(){
 
@@ -123,7 +126,7 @@
            + (joystick.up()    ? ' up'     : '')
            + (joystick.left()  ? ' left'   : '')
            + (joystick.down()  ? ' down'   : '')   
-       }, 100);
+       }, 125);
    </script>
 </body>
 </html>
