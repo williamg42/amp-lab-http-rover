@@ -51,7 +51,7 @@ class MotorController:
         elif R < 0 and L >= 0: #if robot is going forward
             command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, abs(R))
             command = command + "fast-gpio pwm %d %d %d &&" % (self.right_motor_r, 50, 0)
-             ommand = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, 0)
+            command = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, 0)
             command = command + "fast-gpio pwm %d %d %d &" % (self.left_motor_r, 50, L)           
             os.system(command)          
 
@@ -59,6 +59,6 @@ class MotorController:
 
             command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, 0)
             command = command + "fast-gpio pwm %d %d %d &&" % (self.right_motor_r, 50, R)
-             ommand = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, 0)
+            command = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, 0)
             command = command + "fast-gpio pwm %d %d %d &" % (self.left_motor_r, 50, L)           
             os.system(command) 
