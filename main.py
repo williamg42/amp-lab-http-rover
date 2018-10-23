@@ -43,6 +43,7 @@ def api_control(value1=None, value2=None):
     L= (V-W)/2
     controller.Lg = L
     controller.Rg = R
+    controller.drive()
     return ('')
 
 @route('/api/control/move')

@@ -7,34 +7,114 @@
   width: device-width ;
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 300px) {
 
+ body {
+        overflow    : hidden;
+        padding     : 0;
+        margin      : 0;
+        background-color: #BBB;
+    }
+
+    img {
+    max-width: 35%;
+    height: auto;
+    position: relative;
+   
+}
+
+    #info {
+        position    : absolute;
+        top     : 0px;
+        width       : 100%;
+        padding     : 5px;
+        text-align  : center;
+    }
+    #info a {
+        color       : #66F;
+        text-decoration : none;
+    }
+    #info a:hover {
+        text-decoration : underline;
+    }
 
 
+    #joystickcontainer {
 
 
+    width: 300px;
+    margin-right: auto;
+    margin-left: auto;
 
-} 
+    height: 350px;
+    background: #800000;
+    }
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 600px) {
-
- 
-
-
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #800000;
+    color: white;
+    text-align: center;
+     font-size: 8px;
+}
 }
 
 
-
-/* Extra large devices ( laptops and desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
 
-  
+	 body {
+        overflow    : hidden;
+        padding     : 0;
+        margin      : 0;
+        background-color: #BBB;
+    }
 
+    img {
+    max-width: 20%;
+    height: auto;
+}
+
+    #info {
+        position    : absolute;
+        top     : 0px;
+        width       : 100%;
+        padding     : 5px;
+        text-align  : center;
+    }
+    #info a {
+        color       : #66F;
+        text-decoration : none;
+    }
+    #info a:hover {
+        text-decoration : underline;
+    }
+
+
+    #joystickcontainer {
+
+
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+
+    height: 400px;
+    background: #800000;
+    }
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #800000;
+    color: white;
+    text-align: center;
+    font-size: 15px;
 }
 
 
-
-  
+}
 

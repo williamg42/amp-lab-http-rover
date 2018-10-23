@@ -2,131 +2,101 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="/static/css/controller.css">    
 
-    <style>
-    body {
-        overflow    : hidden;
-        padding     : 0;
-        margin      : 0;
-        background-color: #BBB;
-    }
-    #info {
-        position    : absolute;
-        top     : 0px;
-        width       : 100%;
-        padding     : 5px;
-        text-align  : center;
-    }
-    #info a {
-        color       : #66F;
-        text-decoration : none;
-    }
-    #info a:hover {
-        text-decoration : underline;
-    }
-    #container {
-        width       : 100%;
-        height      : 100%;
-        overflow    : hidden;
-        padding     : 0;
-        margin      : 0;
-        -webkit-user-select : none;
-        -moz-user-select    : none;
-    }
-</style>
+    <img src="/static/img/customLogo.png" alt="AMP Lab Logo">
+    <img src="/static/img/ECElogo.png" alt="AMP Lab Logo" align="right">
+
+
+
+
 </head>
 <body>
-    <div id="container"></div>
-    <div id="info">
-        <span id="result"></span>
-    </div> 
-    <script src="/static/js/virtualjoystick.js"></script>
-    <script>
-        console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
 
-        var currentxposition= 0;
-        var currentyposition= 0;
-        var pastxposition= 0;
-        var pastyposition= 0;
-
-        var joystick    = new VirtualJoystick({
-            container   : document.getElementById('container'),
-            mouseSupport    : true,
-            stationaryBase  : false,
-            limitStickTravel: true,
-            stickRadius: 100
-        });
-
-        function Senddata() {
-
-            var r = new XMLHttpRequest();
-            r.open("GET", "/api/control/drive/" + Math.round(joystick.deltaX()) + "/"+ Math.round(joystick.deltaY()));
-            r.send();
-
-        }
-
-        function Senddatazero() {
-
-            var r = new XMLHttpRequest();
-            r.open("GET", "/api/control/drive/" + (0) + "/" + (0));
-            r.send();
-
-        }
-
-        function Sendmove() {
-
-            var r = new XMLHttpRequest();
-            r.open("GET", "/api/control/move");
-            r.send();
-
-        }
-
-
-        joystick.addEventListener('touchEnd', Senddatazero);
+     
+ 
+    <div class="footer">
+      <p>Created by William Gerhard. <br> For more directions visit https://github.com/williamg42/amp-lab-http-rover</p>
+  </div>
 
 
 
-        setInterval(function(){
-
-           var outputEl    = document.getElementById('result');
-
-           currentxposition = Math.round(joystick.deltaX())
-           currentyposition = Math.round(joystick.deltaY())
-           
-         
-            if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
-
-                pastyposition = currentyposition
-                pastxposition = currentxposition
-            
-            } 
-
-            else {
-
-                pastyposition = currentyposition
-                pastxposition = currentxposition
-
-            var r = new XMLHttpRequest();
-            r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
-            r.send();
-
-            var r = new XMLHttpRequest();
-            r.open("GET", "/api/control/move");
-            r.send();
-
-            
-            }
 
 
 
-           outputEl.innerHTML  = '<b>Result:</b> '
-           + ' dx:'+Math.round(joystick.deltaX())
-           + ' dy:'+Math.round(joystick.deltaY())
-           + (joystick.right() ? ' right'  : '')
-           + (joystick.up()    ? ' up'     : '')
-           + (joystick.left()  ? ' left'   : '')
-           + (joystick.down()  ? ' down'   : '')   
-       }, 150);
-   </script>
+  <script src="/static/js/virtualjoystick.js"></script>
+  <script>
+    console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
+
+    var currentxposition= 0;
+    var currentyposition= 0;
+    var pastxposition= 0;
+    var pastyposition= 0;
+
+    var joystick = new VirtualJoystick({
+      container : document.getElementById('container'),
+      mouseSupport: true,
+      stationaryBase: false,
+      limitStickTravel: true,
+      stickRadius: 100
+  });
+
+
+    function Senddata() {
+
+        var r = new XMLHttpRequest();
+        r.open("GET", "/api/control/drive/" + Math.round(joystick.deltaX()) + "/"+ Math.round(joystick.deltaY()));
+        r.send();
+
+    }
+
+    function Senddatazero() {
+
+        var r = new XMLHttpRequest();
+        r.open("GET", "/api/control/drive/" + (0) + "/" + (0));
+        r.send();
+
+    }
+
+
+
+    joystick.addEventListener('touchEnd', Senddatazero);
+
+
+
+    setInterval(function(){
+
+
+     currentxposition = Math.round(joystick.deltaX())
+     currentyposition = Math.round(joystick.deltaY())
+
+
+     if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
+
+        pastyposition = currentyposition
+        pastxposition = currentxposition
+
+    } 
+
+    else {
+
+        pastyposition = currentyposition
+        pastxposition = currentxposition
+
+        var r = new XMLHttpRequest();
+        r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
+        r.send();
+
+
+    }
+
+}, 150);
+</script>
+
+ <div id="joystickcontainer"> 
+    <center> <font color="white">Tap and drag inside to control your robot!</font> </div>
+
 </body>
 </html>
+
+
