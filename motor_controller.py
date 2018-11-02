@@ -40,26 +40,28 @@ class MotorController:
 
     def left(self):
         print('left')
-        pwmMotor(self.left_motor_f, 200, 0)
-        pwmMotor(self.right_motor_f, 200, 100)
-        pwmMotor(self.left_motor_r, 200, 0)
-        pwmMotor(self.right_motor_r, 200, 0)
+        command = "fast-gpio set %d %d && " % (self.right_motor_f, 1)
+        command = command + "fast-gpio set %d %d &&" % (self.right_motor_r, 0)
+        command = command + "fast-gpio set %d %d && " % (self.left_motor_f, 0)
+        command = command + "fast-gpio set %d %d" % (self.left_motor_r, 0)
+	os.system(command)
 
 
     def right(self):
         print('right')
-        pwmMotor(self.left_motor_f, 200, 100)
-        pwmMotor(self.right_motor_f, 200, 0)
-        pwmMotor(self.left_motor_r, 200, 0)
-        pwmMotor(self.right_motor_r, 200, 0)
+        command = "fast-gpio set %d %d && " % (self.right_motor_f, 0)
+        command = command + "fast-gpio set %d %d &&" % (self.right_motor_r, 0)
+        command = command + "fast-gpio set %d %d && " % (self.left_motor_f, 1)
+        command = command + "fast-gpio set %d %d" % (self.left_motor_r, 0)
+	os.system(command)
 
     def stop(self):
         print('stop')
-
-        pwmMotor(self.left_motor_f, 200, 0)
-        pwmMotor(self.right_motor_f, 200, 0)
-        pwmMotor(self.left_motor_r, 200, 0)
-        pwmMotor(self.right_motor_r, 200, 0)
+        command = "fast-gpio set %d %d && " % (self.right_motor_f, 0)
+        command = command + "fast-gpio set %d %d &&" % (self.right_motor_r, 0)
+        command = command + "fast-gpio set %d %d && " % (self.left_motor_f, 0)
+        command = command + "fast-gpio set %d %d" % (self.left_motor_r, 0)
+	os.system(command)
     
     def reverse(self):
         print('reverse')
