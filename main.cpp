@@ -25,6 +25,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <math.h>
+#include <iostream>
+#define timerPeriod 50
 
 static const MPUIMU::Gscale_t GSCALE = MPUIMU::GFS_250DPS;
 static const MPUIMU::Ascale_t ASCALE = MPUIMU::AFS_2G;
@@ -74,8 +77,8 @@ int main ()
 		printf("MPU6050 online!\n");
 	}
 
-	int rightforwardmotordelay = 250; //0 is completed off, 1000 is completed on,
-	int leftforwardmotordelay = 250;
+	int rightforwardmotorpercentage = 10; //0 is completed off, 1000 is completed on,
+	int leftforwardmotorpercentage = 10;
 
 
 	delay(1000);
@@ -83,10 +86,15 @@ int main ()
 
 	while (1)
 	{
-		if (timer > 1000) //sets a 50 ms timer period
+
+	int rightforwarddutycycle = timerPeriod/(timerPeriod*rightforwardmotorpercentage/100);
+	int leftforwarddutycycle =  timerPeriod/(timerPeriod*leftforwardmotorpercentage/100);
+	std::cout << rightforwarddutycycle << std::endl;
+
+		if (timer > timerPeriod) //sets a 50 ms timer period
 			timer = 0;
 
-		if ( timer % 10 == 0 ) //every x miliseconds do something
+		if ( timer % 5 == 0 ) //every x miliseconds do something
 		{
 			// If data ready bit set, all data registers have new data
 			if (imu.checkNewData()) {  // check if data ready interrupt
@@ -97,14 +105,14 @@ int main ()
 
 				temperature = imu.readTemperature();
 
-				if (gz > 0)
+				if (gz > 5)
 				{
-					rightforwardmotordelay++;
+					
 
 				}
-				else if (gz < 0)
+				else if (gz < -5)
 				{
-					leftforwardmotordelay++;
+					
 
 				}
 
@@ -116,10 +124,26 @@ int main ()
 
 			}
 
+     // Print acceleration values in milligs!
+        printf("\nX-acceleration: %f mg ", 1000*ax);
+        printf("Y-acceleration: %f mg ", 1000*ay);
+        printf("Z-acceleration: %f mg\n", 1000*az);
+
+        // Print gyro values in degree/sec
+        printf("X-gyro rate: %4.1f degrees/sec  ", gx);
+        printf("Y-gyro rate: %4.1f degrees/sec  ", gy);
+        printf("Z-gyro rate: %4.1f degrees/sec\n", gz);
+	printf("Right Motor Delay: %i\n", rightforwardmotorpercentage);
+printf("Left Motor Delay: %i\n", leftforwardmotorpercentage);
+
+
+        // Print temperature in degrees Centigrade      
+printf("Temperature is %2.2f degrees C\n", temperature);
+
 
 		}
 
-		if (timer > rightforwardmotordelay)
+		if (timer == 1000 )
 		{
 			Gpio::digitalWrite(19, 1);//turn gpio on
 			Gpio::digitalWrite(18, 0);//turn gpio on
@@ -130,16 +154,19 @@ int main ()
 			Gpio::digitalWrite(18, 0);//turn gpio on
 		}
 
-		if (timer > leftforwardmotordelay)
+		if (timer == 1000)
 		{
-			Gpio::digitalWrite(16, 1);//turn gpio on
-			Gpio::digitalWrite(15, 0);//turn gpio on
+			Gpio::digitalWrite(15, 1);//turn gpio on
+			Gpio::digitalWrite(16, 0);//turn gpio on
 		}
 		else
 		{
-			Gpio::digitalWrite(16, 0);//turn gpio on
 			Gpio::digitalWrite(15, 0);//turn gpio on
+			Gpio::digitalWrite(16, 0);//turn gpio on
 		}
+
+
+
 
 
 
@@ -149,7 +176,7 @@ int main ()
 
 
 		timer++;
-		usleep(1);
+		delay(1);
 
 	}
 }
