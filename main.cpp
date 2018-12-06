@@ -46,6 +46,15 @@ uint32_t millis(void);
 
 int main ()
 {
+
+	static float temperature;
+	
+		static float ax, ay, az;
+static float gx, gy, gz;
+
+
+
+ Gpio::initialize();
 	Gpio::pinMode(17, GPD_OUTPUT);
 
 
@@ -59,8 +68,8 @@ int main ()
 		printf("MPU6050 online!\n");
 	}
 
-	int rightforwardmotordelay = 25; //0 is completed off, 50 is completed on,
-	int leftforwardmotordelay = 25;
+	int rightforwardmotordelay = 250; //0 is completed off, 50 is completed on,
+	int leftforwardmotordelay = 250;
 
 
 	delay(1000);
@@ -68,12 +77,22 @@ int main ()
 
 	while (1)
 	{
-		if (timer > 50) //sets a 50 ms timer period
+if (timer > 500) //sets a 50 ms timer period
 			timer = 0;
 
-		if ( timer % 2 == 0 ) //every x miliseconds do something
+		if ( timer % 10 == 0 ) //every x miliseconds do something
 		{
-			//update motor commands
+			     // If data ready bit set, all data registers have new data
+                if (imu.checkNewData()) {  // check if data ready interrupt
+
+                        imu.readAccelerometer(ax, ay, az);
+
+                        imu.readGyrometer(gx, gy, gz);
+
+                        temperature = imu.readTemperature();
+                }
+
+
 		}
 
 		if (timer > rightforwardmotordelay)
@@ -82,7 +101,7 @@ int main ()
 		}
 		else
 		{
-			Gpio::digitalWrite(LED_PIN, 0);//turn gpio off
+			Gpio::digitalWrite(17, 0);//turn gpio off
 		}
 
 		if (timer > leftforwardmotordelay)
@@ -102,7 +121,7 @@ int main ()
 
 
 		timer++;
-		delay(1);
+		usleep(1);
 
 	}
 }
