@@ -107,11 +107,20 @@ int main ()
 
 				if (gz > 5)
 				{
-					
+					if (rightforwardmotorpercentage > -1 && rightforwardmotorpercentage < 101)
+					{
+						rightforwardmotorpercentage++;
+						leftforwardmotorpercentage--;
+					}
 
 				}
 				else if (gz < -5)
 				{
+					if (leftforwardmotorpercentage > -1 && leftforwardmotorpercentage < 101)
+					{
+						leftforwardmotorpercentage++;
+						rightforwardmotorpercentage--;
+					}
 					
 
 				}
@@ -143,7 +152,7 @@ printf("Temperature is %2.2f degrees C\n", temperature);
 
 		}
 
-		if (timer == 1000 )
+		if (timer%rightforwarddutycycle == 0 )
 		{
 			Gpio::digitalWrite(19, 1);//turn gpio on
 			Gpio::digitalWrite(18, 0);//turn gpio on
@@ -154,7 +163,7 @@ printf("Temperature is %2.2f degrees C\n", temperature);
 			Gpio::digitalWrite(18, 0);//turn gpio on
 		}
 
-		if (timer == 1000)
+		if (timer%leftforwarddutycycle == 0)
 		{
 			Gpio::digitalWrite(15, 1);//turn gpio on
 			Gpio::digitalWrite(16, 0);//turn gpio on
