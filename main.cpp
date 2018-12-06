@@ -48,14 +48,20 @@ int main ()
 {
 
 	static float temperature;
-	
-		static float ax, ay, az;
-static float gx, gy, gz;
+	static float ax, ay, az;
+	static float gx, gy, gz;
 
 
 
- Gpio::initialize();
+	Gpio::initialize();
+	Gpio::pinMode(19, GPD_OUTPUT);
+	Gpio::pinMode(18, GPD_OUTPUT);
+
 	Gpio::pinMode(17, GPD_OUTPUT);
+
+	Gpio::pinMode(16, GPD_OUTPUT);
+	Gpio::pinMode(15, GPD_OUTPUT);
+
 
 
 	switch (imu.begin(0)) {
@@ -68,7 +74,7 @@ static float gx, gy, gz;
 		printf("MPU6050 online!\n");
 	}
 
-	int rightforwardmotordelay = 250; //0 is completed off, 50 is completed on,
+	int rightforwardmotordelay = 250; //0 is completed off, 1000 is completed on,
 	int leftforwardmotordelay = 250;
 
 
@@ -77,40 +83,62 @@ static float gx, gy, gz;
 
 	while (1)
 	{
-if (timer > 500) //sets a 50 ms timer period
+		if (timer > 1000) //sets a 50 ms timer period
 			timer = 0;
 
 		if ( timer % 10 == 0 ) //every x miliseconds do something
 		{
-			     // If data ready bit set, all data registers have new data
-                if (imu.checkNewData()) {  // check if data ready interrupt
+			// If data ready bit set, all data registers have new data
+			if (imu.checkNewData()) {  // check if data ready interrupt
 
-                        imu.readAccelerometer(ax, ay, az);
+				imu.readAccelerometer(ax, ay, az);
 
-                        imu.readGyrometer(gx, gy, gz);
+				imu.readGyrometer(gx, gy, gz);
 
-                        temperature = imu.readTemperature();
-                }
+				temperature = imu.readTemperature();
+
+				if (gz > 0)
+				{
+					rightforwardmotordelay++;
+
+				}
+				else if (gz < 0)
+				{
+					leftforwardmotordelay++;
+
+				}
+
+				else
+				{
+					
+				}
+
+
+			}
 
 
 		}
 
 		if (timer > rightforwardmotordelay)
 		{
-			Gpio::digitalWrite(17, 1);//turn gpio on
+			Gpio::digitalWrite(19, 1);//turn gpio on
+			Gpio::digitalWrite(18, 0);//turn gpio on
 		}
 		else
 		{
-			Gpio::digitalWrite(17, 0);//turn gpio off
+			Gpio::digitalWrite(19, 0);//turn gpio on
+			Gpio::digitalWrite(18, 0);//turn gpio on
 		}
 
 		if (timer > leftforwardmotordelay)
 		{
-//turn gpio on
+			Gpio::digitalWrite(16, 1);//turn gpio on
+			Gpio::digitalWrite(15, 0);//turn gpio on
 		}
 		else
 		{
-			//turn gpio off
+			Gpio::digitalWrite(16, 0);//turn gpio on
+			Gpio::digitalWrite(15, 0);//turn gpio on
 		}
 
 
