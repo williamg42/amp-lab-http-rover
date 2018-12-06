@@ -79,17 +79,36 @@ int main ()
 
 	int rightforwardmotorpercentage = 10; //0 is completed off, 1000 is completed on,
 	int leftforwardmotorpercentage = 10;
-
+	int rightforwarddutycycle = 0;
+int leftforwarddutycycle = 0;
 
 	delay(1000);
 
 
 	while (1)
 	{
+if (rightforwardmotorpercentage != 0)
+{
+	rightforwarddutycycle = timerPeriod/(((float)timerPeriod*(float)rightforwardmotorpercentage)/100.0);
+ std::cout << rightforwardmotorpercentage << std::endl;
+}
 
-	int rightforwarddutycycle = timerPeriod/(timerPeriod*rightforwardmotorpercentage/100);
-	int leftforwarddutycycle =  timerPeriod/(timerPeriod*leftforwardmotorpercentage/100);
-	std::cout << rightforwarddutycycle << std::endl;
+else
+{
+rightforwarddutycycle = timerPeriod;
+}
+
+if (leftforwardmotorpercentage != 0)
+{
+        leftforwarddutycycle = timerPeriod/(((float)timerPeriod*(float)leftforwardmotorpercentage)/100.0);
+ std::cout << leftforwardmotorpercentage << std::endl;
+}
+
+else
+{
+leftforwarddutycycle = timerPeriod;
+}
+
 
 		if (timer > timerPeriod) //sets a 50 ms timer period
 			timer = 0;
@@ -105,22 +124,34 @@ int main ()
 
 				temperature = imu.readTemperature();
 
-				if (gz > 5)
+				if (gz > 10)
 				{
-					if (rightforwardmotorpercentage > -1 && rightforwardmotorpercentage < 101)
+					if (rightforwardmotorpercentage > 0 && rightforwardmotorpercentage < 101)
 					{
 						rightforwardmotorpercentage++;
-						leftforwardmotorpercentage--;
+						
 					}
 
+                                        if (leftforwardmotorpercentage > 0 && leftforwardmotorpercentage < 101)
+                                        {
+                                                leftforwardmotorpercentage--;
+
+                                        }
+
 				}
-				else if (gz < -5)
+				else if (gz < -10)
 				{
-					if (leftforwardmotorpercentage > -1 && leftforwardmotorpercentage < 101)
+					if (leftforwardmotorpercentage > 0 && leftforwardmotorpercentage < 101)
 					{
 						leftforwardmotorpercentage++;
-						rightforwardmotorpercentage--;
+						
 					}
+
+ if (rightforwardmotorpercentage > 0 && rightforwardmotorpercentage < 101)
+                                        {
+                                                rightforwardmotorpercentage--;
+
+                                        }
 					
 
 				}
@@ -129,6 +160,10 @@ int main ()
 				{
 					
 				}
+
+std::cout << leftforwardmotorpercentage << std::endl;
+std::cout << rightforwardmotorpercentage << std::endl;
+
 
 
 			}
