@@ -27,7 +27,7 @@
 #include <errno.h>
 #include <math.h>
 #include <iostream>
-#define timerPeriod 50
+#define timerPeriod 100
 
 static const MPUIMU::Gscale_t GSCALE = MPUIMU::GFS_250DPS;
 static const MPUIMU::Ascale_t ASCALE = MPUIMU::AFS_2G;
@@ -79,41 +79,30 @@ int main ()
 
 	int rightforwardmotorpercentage = 10; //0 is completed off, 1000 is completed on,
 	int leftforwardmotorpercentage = 10;
-	int rightforwarddutycycle = 0;
-int leftforwarddutycycle = 0;
+	int rightforwardcount = 0;
+	int leftforwardcount = 0;
 
 	delay(1000);
 
 
 	while (1)
 	{
-if (rightforwardmotorpercentage != 0)
-{
-	rightforwarddutycycle = timerPeriod/(((float)timerPeriod*(float)rightforwardmotorpercentage)/100.0);
- std::cout << rightforwardmotorpercentage << std::endl;
-}
 
-else
-{
-rightforwarddutycycle = timerPeriod;
-}
+		if (rightforwardmotorpercentage != 0)
+			rightforwardcount = (timerPeriod / (timerPeriod * rightforwardmotorpercentage) / 100);
+		else
+			rightforwardcount = timerPeriod + 1;
+		if (leftforwardmotorpercentage != 0)
+			leftforwardcount =  (timerPeriod / (timerPeriod * leftforwardmotorpercentage) / 100);
+		else
+			leftforwardcount = timerPeriod + 1;
 
-if (leftforwardmotorpercentage != 0)
-{
-        leftforwarddutycycle = timerPeriod/(((float)timerPeriod*(float)leftforwardmotorpercentage)/100.0);
- std::cout << leftforwardmotorpercentage << std::endl;
-}
-
-else
-{
-leftforwarddutycycle = timerPeriod;
-}
 
 
 		if (timer > timerPeriod) //sets a 50 ms timer period
 			timer = 0;
 
-		if ( timer % 5 == 0 ) //every x miliseconds do something
+		if ( timer % 10 == 0 ) //every x miliseconds do something
 		{
 			// If data ready bit set, all data registers have new data
 			if (imu.checkNewData()) {  // check if data ready interrupt
@@ -124,70 +113,31 @@ leftforwarddutycycle = timerPeriod;
 
 				temperature = imu.readTemperature();
 
-				if (gz > 10)
-				{
-					if (rightforwardmotorpercentage > 0 && rightforwardmotorpercentage < 101)
-					{
-						rightforwardmotorpercentage++;
-						
-					}
-
-                                        if (leftforwardmotorpercentage > 0 && leftforwardmotorpercentage < 101)
-                                        {
-                                                leftforwardmotorpercentage--;
-
-                                        }
-
-				}
-				else if (gz < -10)
-				{
-					if (leftforwardmotorpercentage > 0 && leftforwardmotorpercentage < 101)
-					{
-						leftforwardmotorpercentage++;
-						
-					}
-
- if (rightforwardmotorpercentage > 0 && rightforwardmotorpercentage < 101)
-                                        {
-                                                rightforwardmotorpercentage--;
-
-                                        }
-					
-
-				}
-
-				else
-				{
-					
-				}
-
-std::cout << leftforwardmotorpercentage << std::endl;
-std::cout << rightforwardmotorpercentage << std::endl;
 
 
 
 			}
 
-     // Print acceleration values in milligs!
-        printf("\nX-acceleration: %f mg ", 1000*ax);
-        printf("Y-acceleration: %f mg ", 1000*ay);
-        printf("Z-acceleration: %f mg\n", 1000*az);
+			// Print acceleration values in milligs!
+			printf("\nX-acceleration: %f mg ", 1000 * ax);
+			printf("Y-acceleration: %f mg ", 1000 * ay);
+			printf("Z-acceleration: %f mg\n", 1000 * az);
 
-        // Print gyro values in degree/sec
-        printf("X-gyro rate: %4.1f degrees/sec  ", gx);
-        printf("Y-gyro rate: %4.1f degrees/sec  ", gy);
-        printf("Z-gyro rate: %4.1f degrees/sec\n", gz);
-	printf("Right Motor Delay: %i\n", rightforwardmotorpercentage);
-printf("Left Motor Delay: %i\n", leftforwardmotorpercentage);
+			// Print gyro values in degree/sec
+			printf("X-gyro rate: %4.1f degrees/sec  ", gx);
+			printf("Y-gyro rate: %4.1f degrees/sec  ", gy);
+			printf("Z-gyro rate: %4.1f degrees/sec\n", gz);
+			printf("Right Motor Delay: %i\n", rightforwardmotorpercentage);
+			printf("Left Motor Delay: %i\n", leftforwardmotorpercentage);
 
 
-        // Print temperature in degrees Centigrade      
-printf("Temperature is %2.2f degrees C\n", temperature);
+			// Print temperature in degrees Centigrade
+			printf("Temperature is %2.2f degrees C\n", temperature);
 
 
 		}
 
-		if (timer%rightforwarddutycycle == 0 )
+		if (timer % rightforwarddutycycle == 0 )
 		{
 			Gpio::digitalWrite(19, 1);//turn gpio on
 			Gpio::digitalWrite(18, 0);//turn gpio on
@@ -198,7 +148,7 @@ printf("Temperature is %2.2f degrees C\n", temperature);
 			Gpio::digitalWrite(18, 0);//turn gpio on
 		}
 
-		if (timer%leftforwarddutycycle == 0)
+		if (timer % leftforwarddutycycle == 0)
 		{
 			Gpio::digitalWrite(15, 1);//turn gpio on
 			Gpio::digitalWrite(16, 0);//turn gpio on
@@ -208,14 +158,6 @@ printf("Temperature is %2.2f degrees C\n", temperature);
 			Gpio::digitalWrite(15, 0);//turn gpio on
 			Gpio::digitalWrite(16, 0);//turn gpio on
 		}
-
-
-
-
-
-
-
-
 
 
 
