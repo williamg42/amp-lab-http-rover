@@ -29,8 +29,8 @@ class MotorController:
 
             command = "fast-gpio set %d %d && " % (self.right_motor_f, 0)
             command = command + "fast-gpio set %d %d &&" % (self.right_motor_r, 0)
-            command = command + "onion pwm %d %d %d && " % (1, 0, 50)
-            command = command + "onion pwm %d %d %d" % (0, 0, 50)
+            command = command + "fast-gpio set %d %d && " % (self.left_motor_f, 0)
+            command = command + "fast-gpio set %d %d" % (self.left_motor_r, 0)
             os.system(command)
 
 
@@ -39,8 +39,8 @@ class MotorController:
             
             command = "fast-gpio set %d %d && " % (self.right_motor_f, 1)
             command = command + "fast-gpio set %d %d &&" % (self.right_motor_r, 0)
-            command = command + "onion pwm %d %d %d && " % (1, 100, 50)
-            command = command + "onion pwm %d %d %d" % (0, 0, 50)
+            command = command + "fast-gpio set %d %d && " % (self.left_motor_f, 1)
+            command = command + "fast-gpio set %d %d" % (self.left_motor_r, 0)
             os.system(command)
 
 
@@ -49,8 +49,8 @@ class MotorController:
             
             command = "fast-gpio set %d %d && " % (self.right_motor_f, 1)
             command = command + "fast-gpio set %d %d &&" % (self.right_motor_r, 0)
-            command = command + "onion pwm %d %d %d && " % (1, abs(L), 50)
-            command = command + "onion pwm %d %d %d" % (0, 0, 50)
+            command = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, abs(L))
+            command = command + "fast-gpio set %d %d" % (self.left_motor_r, 0)
             os.system(command)
 
         elif R < 0 and L < -98: #if robot is going forward
@@ -58,8 +58,8 @@ class MotorController:
             
             command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, abs(R))
             command = command + "fast-gpio set %d %d &&" % (self.right_motor_r, 0)
-            command = command + "onion pwm %d %d %d && " % (1, 100, 50)
-            command = command + "onion pwm %d %d %d" % (0, 0, 50)
+            command = command + "fast-gpio set %d %d && " % (self.left_motor_f, 1)
+            command = command + "fast-gpio set %d %d" % (self.left_motor_r, 0)
             os.system(command)
 
 
@@ -68,8 +68,8 @@ class MotorController:
             
             command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, abs(R))
             command = command + "fast-gpio set %d %d &&" % (self.right_motor_r, 0)
-            command = command + "onion pwm %d %d %d && " % (1, abs(L), 50)
-            command = command + "onion pwm %d %d %d" % (0, 0, 50)
+            command = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, abs(L))
+            command = command + "fast-gpio set %d %d" % (self.left_motor_r, 0)
             os.system(command)
 
 
@@ -77,8 +77,8 @@ class MotorController:
 
             command = "fast-gpio set %d %d && " % (self.right_motor_f, 0)
             command = command + "fast-gpio set %d %d && " % (self.right_motor_r, 1)
-            command = command + "onion pwm %d %d %d && " % (1, abs(L), 50)
-            command = command + "onion pwm %d %d %d" % (0, 0, 50)
+            command = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, abs(L))
+            command = command + "fast-gpio set %d %d" % (self.left_motor_r, 0)
             os.system(command) 
            
 
@@ -87,38 +87,38 @@ class MotorController:
 
             command = "fast-gpio set %d %d && " % (self.right_motor_f, 0)
             command = command + "fast-gpio pwm %d %d %d && " % (self.right_motor_r, 50, R)
-            command = command + "onion pwm %d %d %d && " % (1, abs(L), 50)
-            command = command + "onion pwm %d %d %d" % (0, 0, 50)
+            command = command + "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, abs(L))
+            command = command + "fast-gpio set %d %d" % (self.left_motor_r, 0)
             os.system(command) 
 
 
         elif R < 0 and L > 98: #if robot is going forward
             command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, abs(R))
             command = command + "fast-gpio set %d %d &&" % (self.right_motor_r, 0)
-            command = command + "onion pwm %d %d %d && " % (1, 0, 50)
-            command = command + "onion pwm %d %d %d" % (0, 100, 50)          
+            command = command + "fast-gpio set %d %d && " % (self.left_motor_f, 0)
+            command = command + "fast-gpio set %d %d" % (self.left_motor_r, 1)           
             os.system(command) 
 
 
         elif R < 0 and L > 0: #if robot is going forward
             command = "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, abs(R))
             command = command + "fast-gpio set %d %d &&" % (self.right_motor_r, 0)
-            command = command + "onion pwm %d %d %d && " % (1, 0, 50)
-            command = command + "onion pwm %d %d %d" % (0, L, 50)          
+            command = command + "fast-gpio set %d %d && " % (self.left_motor_f, 0)
+            command = command + "fast-gpio pwm %d %d %d" % (self.left_motor_r, 50, L)           
             os.system(command)       
 
 
         elif R > 98 and L > 98: #if robot is going forward
             command = "fast-gpio set %d%d && " % (self.right_motor_f, 1)
             command = command + "fast-gpio set %d %d &&" % (self.right_motor_r, 0)
-            command = command + "onion pwm %d %d %d && " % (1, 0, 50)
-            command = command + "onion pwm %d %d %d" % (0, 100, 50)          
+            command = command + "fast-gpio set %d %d && " % (self.left_motor_f, 0)
+            command = command + "fast-gpio set %d %d" % (self.left_motor_r, 1)           
             os.system(command)       
 
         else: 
 
             command = "fast-gpio set %d %d && " % (self.right_motor_f, 0)
             command = command + "fast-gpio pwm %d %d %d &&" % (self.right_motor_r, 50, R)
-            command = command + "onion pwm %d %d %d && " % (1, 0, 50)
-            command = command + "onion pwm %d %d %d" % (0, L, 50)         
+            command = command + "fast-gpio set %d %d && " % (self.left_motor_f, 0)
+            command = command + "fast-gpio pwm %d %d %d" % (self.left_motor_r, 50, L)           
             os.system(command) 
