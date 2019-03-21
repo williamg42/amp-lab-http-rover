@@ -69,4 +69,4 @@ def main():
             print('Unable to parse command line arguments.')
 
 if __name__ == '__main__':
-    main()
+main()
