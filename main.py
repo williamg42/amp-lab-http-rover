@@ -1,7 +1,7 @@
 import sys
 import threading
 import time
-
+import math
 from motor_controller import MotorController
 
 
@@ -35,14 +35,46 @@ def controller():
 
 @route('/api/control/drive/<value1>/<value2>')
 def api_control(value1=None, value2=None):
-    X =int(round(float(value1)))
-    Y = int(round(float(value2)))
-    V =(100-abs(X)) * (Y/100) + Y
-    W= (100-abs(Y)) * (X/100) + X
-    R = (V+W) /2
-    L= (V-W)/2
-    controller.Lg = L
-    controller.Rg = R
+    nJoyX =int(round(float(value1)))
+    nJoyY = int(round(float(value2)))
+    fPivYLimit = 32.0
+    fPivScale = 0
+    nPivSpeed = 0
+    nMotPremixL = 0
+    nMotPremixR = 0
+
+ 	# Calculate Drive Turn output due to Joystick X input
+    if (nJoyY >= 0):
+	#x = true_value if condition else false_value
+  # Forward
+    	nMotPremixL = 127.0 if nJoyX >=0 else (127.0 + nJoyX)
+  	nMotPremixR = (127.0 - nJoyX) if nJoyX >=0 else 127.0
+  	
+    else: 
+  # Reverse
+  	nMotPremixL = (127.0 - nJoyX) if nJoyX >=0 else 127.0
+  	nMotPremixR = 127.0 if nJoyX>=0 else (127.0 + nJoyX)
+  	
+
+
+# Scale Drive output due to Joystick Y input (throttle)
+    nMotPremixL = nMotPremixL * nJoyY/128.0
+    nMotPremixR = nMotPremixR * nJoyY/128.0
+
+# Now calculate pivot amount
+# - Strength of pivot (nPivSpeed) based on Joystick X input
+# - Blending of pivot vs drive (fPivScale) based on Joystick Y input
+    nPivSpeed =-1*nJoyX
+    fPivScale = 0.0 if abs(nJoyY)>fPivYLimit else (1.0 - abs(nJoyY)/fPivYLimit)
+
+# Calculate final mix of Drive and Pivot
+    nMotMixL = (1.0-fPivScale)*nMotPremixL + fPivScale*( nPivSpeed)
+    nMotMixR = (1.0-fPivScale)*nMotPremixR + fPivScale*(-nPivSpeed)
+
+    print(nMotMixL)
+    print(nMotMixR)
+    controller.Lg = nMotMixR
+    controller.Rg = nMotMixL
     controller.drive()
     return ('')
 
