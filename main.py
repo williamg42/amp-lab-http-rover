@@ -73,8 +73,8 @@ def api_control(value1=None, value2=None):
 
     print(nMotMixL)
     print(nMotMixR)
-    controller.Lg = nMotMixR
-    controller.Rg = nMotMixL
+    controller.Lg = (nMotMixR - (-127.0)) * ((100.0) - (-100.0)) / ((127.0) - (-127.0)) + (-100.0)
+    controller.Rg = (nMotMixL - (-127.0)) * ((100.0) - (-100.0)) / ((127.0) - (-127.0)) + (-100.0) 
     controller.drive()
     return ('')
 
