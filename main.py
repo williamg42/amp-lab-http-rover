@@ -83,13 +83,7 @@ def api_control(value1=None, value2=None):
     controller.Rg = (nMotMixL - (-127.0)) * ((100.0) - (-100.0)) / ((127.0) - (-127.0)) + (-100.0) 
     controller.drive()
 
-    print('----------------')
-    print(                   agps_thread.data_stream.time)
-    print('Lat:{}   '.format(agps_thread.data_stream.lat))
-    print('Lon:{}   '.format(agps_thread.data_stream.lon))
-    print('Speed:{} '.format(agps_thread.data_stream.speed))
-    print('Course:{}'.format(agps_thread.data_stream.track))
-    print('----------------')
+
 
 
 
@@ -102,6 +96,19 @@ def api_control():
     controller.drive()
     return ('')
 
+
+@route('/api/control/GPS/')
+def api_control():
+    print('----------------')
+    print(                   agps_thread.data_stream.time)
+    print('Lat:{}   '.format(agps_thread.data_stream.lat))
+    print('Lon:{}   '.format(agps_thread.data_stream.lon))
+    print('Speed:{} '.format(agps_thread.data_stream.speed))
+    print('Course:{}'.format(agps_thread.data_stream.track))
+    print('----------------')
+    datapayload = 'Lat:{} \n Lon:{} \n Speed:{} \n Course:{}'.format(agps_thread.data_stream.lat,agps_thread.data_stream.lon,agps_thread.data_stream.track,agps_thread.data_stream.speed)
+    
+    return (datapayload)
 
 
 
