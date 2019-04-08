@@ -3,12 +3,18 @@ import threading
 import time
 import math
 from motor_controller import MotorController
-
+from gps3.agps3threaded import AGPS3mechanism
 
 from bottle import route, run, Bottle
 from bottle import template
 
 from bottle import get, static_file
+
+
+agps_thread = AGPS3mechanism()  # Instantiate AGPS3 Mechan
+agps_thread.stream_data()  # From localhost (), or other h
+agps_thread.run_thread(5)  # Throttle time to sleep after 
+
 
 
 # Static Routes
@@ -76,6 +82,19 @@ def api_control(value1=None, value2=None):
     controller.Lg = (nMotMixR - (-127.0)) * ((100.0) - (-100.0)) / ((127.0) - (-127.0)) + (-100.0)
     controller.Rg = (nMotMixL - (-127.0)) * ((100.0) - (-100.0)) / ((127.0) - (-127.0)) + (-100.0) 
     controller.drive()
+
+    print('----------------')
+    print(                   agps_thread.data_stream.time)
+    print('Lat:{}   '.format(agps_thread.data_stream.lat))
+    print('Lon:{}   '.format(agps_thread.data_stream.lon))
+    print('Speed:{} '.format(agps_thread.data_stream.speed))
+    print('Course:{}'.format(agps_thread.data_stream.track))
+    print('----------------')
+
+
+
+
+
     return ('')
 
 @route('/api/control/move')
