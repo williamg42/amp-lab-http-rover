@@ -56,6 +56,8 @@
         r.open("GET", "/api/control/GPS/");
         r.send();
         var body = r.response;
+	var element = document.getElementById("GPS");
+	element.innerHTML = body;
         
 
     }
@@ -76,7 +78,7 @@
 
     setInterval(function(){
 
-
+     
      currentxposition = Math.round(joystick.deltaX())
      currentyposition = Math.round(joystick.deltaY())
 
@@ -102,7 +104,7 @@
 
 }, 150);
       
-       setInterval2(function(){GetGPSData()}, 2000);
+ setInterval(GetGPSData, 2000);
 </script>
 
 <div id = "imagecontainer">
@@ -110,10 +112,6 @@
 </div>
 <div id = "GPS">
     
-<p id="lat">Lat: NaN</p>
-<p id="long">Long: NaN</p>
-<p id="course">Course: NaN</p>
-<p id="speed">Speed: NaN</p>
 
 </div>
     
