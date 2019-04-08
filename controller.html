@@ -48,6 +48,17 @@
         r.send();
 
     }
+      
+      
+    function GetGPSData() {
+
+        var r = new XMLHttpRequest();
+        r.open("GET", "/api/control/GPS/");
+        r.send();
+        var body = r.response;
+        
+
+    }
 
     function Senddatazero() {
 
@@ -90,11 +101,22 @@
     }
 
 }, 150);
+      
+       setInterval2(function(){GetGPSData()}, 2000);
 </script>
 
 <div id = "imagecontainer">
 <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center"  width="640" height="480">
 </div>
+<div id = "GPS">
+    
+<p id="lat">Lat: NaN</p>
+<p id="long">Long: NaN</p>
+<p id="course">Course: NaN</p>
+<p id="speed">Speed: NaN</p>
+
+</div>
+    
  <div id="joystickcontainer"> 
 
   
