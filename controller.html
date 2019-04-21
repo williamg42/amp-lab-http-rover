@@ -55,32 +55,7 @@
 
 
 
-    setInterval(function() {
-
-
-
-        if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
-
-            pastyposition = currentyposition
-            pastxposition = currentxposition
-
-        } else {
-
-            pastyposition = currentyposition
-            pastxposition = currentxposition
-
-
-            var r = new XMLHttpRequest();
-            r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
-            r.send();
-        }
-
-
-
-
-
-
-    }, 150);
+   
     </script>
     <div id="imagecontainer">
         <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480">
