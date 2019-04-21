@@ -22,6 +22,7 @@
 
 
 
+<script src="/static/js/libgp.js"></script>
   <script>
 
 
@@ -29,41 +30,7 @@
     var currentyposition= 0;
     var pastxposition= 0;
     var pastyposition= 0;
-
-
-	  
-	  // Get the state of all gamepads
- gamepads = navigator.getGamepads();
-
-for (let i = 0; i < gamepads.length; i++) {
-    console.log("Gamepad " + i + ":");
-
-    if (gamepads[i] === null) {
-        console.log("[null]");
-        continue;
-    }
-
-    if (!gamepads[i].connected) {
-        console.log("[disconnected]");
-        continue;
-    }
-
-    console.log("    Index: " + gamepads[i].index);
-    console.log("    ID: " + gamepads[i].id);
-    console.log("    Axes: " + gamepads[i].axes.length);
-    console.log("    Buttons: " + gamepads[i].buttons.length);
-    console.log("    Mapping: " + gamepads[i].mapping);
-}
-
-
-    function Senddata() {
-
-        var r = new XMLHttpRequest();
-        r.open("GET", "/api/control/drive/" + Math.round(joystick.deltaX()) + "/"+ Math.round(joystick.deltaY()));
-        r.send();
-
-    }
-      
+         
       
     function GetGPSData() {
 
@@ -81,25 +48,40 @@ for (let i = 0; i < gamepads.length; i++) {
         r.open("GET", "/api/control/drive/" + (0) + "/" + (0));
         r.send();
 
-    }
+    }   
 
 
 
-   
+    setInterval(function(){    
+	    
+	    	let conCheck = gpLib.testForConnections();
 
+		// Check for connection or disconnection
+		if (conCheck) {
+			console.log(conCheck + " new connections");
 
+		}
+	    
+	    
+	    let gamepads = navigator.getGamepads();
 
-    setInterval(function(){
-
-     
-     gp = gamepads[0];
+// Blindly assuming this is connected
+let gp = gamepads[0];
 
 // Blindly assuming standard mapping
-currentxposition = gp.axes[0]);
-currentyposition = gp.axes[1]);
+let x = gp.axes[2]);
+let y = gp.axes[3]);
 
-console.log("Right stick X: " + currentxposition);
-console.log("Right stick Y: " + currentyposition);
+console.log("Right stick X: " + x);
+console.log("Right stick Y: " + y);
+
+if (y < 0) {
+    console.log("Right stick is being pushed up!");
+}
+	    
+	    
+			
+		
 
 
      if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
@@ -113,17 +95,21 @@ console.log("Right stick Y: " + currentyposition);
 
         pastyposition = currentyposition
         pastxposition = currentxposition
+    
 
         var r = new XMLHttpRequest();
         r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
         r.send();
-
-
     }
+		
+    
+
+
+    
 
 }, 150);
       
- setInterval(GetGPSData, 2000);
+ 
 </script>
 
 <div id = "imagecontainer">
