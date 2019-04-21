@@ -91,14 +91,10 @@ def api_control(value1=None, value2=None):
 
     return ('')
 
-@route('/api/control/move')
-def api_control():
-    controller.drive()
-    return ('')
 
 
 @route('/api/control/GPS/')
-def api_control():
+def api_gps():
     print('----------------')
     print(                   agps_thread.data_stream.time)
     print('Lat:{}   '.format(agps_thread.data_stream.lat))
