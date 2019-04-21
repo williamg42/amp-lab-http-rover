@@ -13,13 +13,25 @@
         <p>Created by William Gerhard. <br> For more directions visit https://github.com/williamg42/amp-lab-http-rover</p>
     </div>
     <script src="/static/js/gamepad.js"></script>
+    <script src="/static/js/virtualjoystick.js"></script>
     <script>
+    console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
+
     var gamepaddetected = 0;
-    var dataPos = [0, 0]
+    var dataPos = [0, 0];
     var currentxposition = 0;
     var currentyposition = 0;
     var pastxposition = 0;
     var pastyposition = 0;
+
+
+    var joystick = new VirtualJoystick({
+        container: document.getElementById('container'),
+        mouseSupport: true,
+        stationaryBase: false,
+        limitStickTravel: true,
+        stickRadius: 127
+    });
 
     const gamepad = new Gamepad();
 
@@ -57,8 +69,19 @@
 
 
     setInterval(function() {
-        currentxposition = Math.round(127 * dataPos[0])
-        currentyposition = Math.round(127 * dataPos[1])
+
+        if (gamepaddetected) {
+            console.log(`Using Gamepad`);
+            currentxposition = Math.round(127 * dataPos[0])
+            currentyposition = Math.round(127 * dataPos[1])
+        } else {
+            console.log(`Using VirtualJoystick`);
+            currentxposition = Math.round(joystick.deltaX())
+            currentyposition = Math.round(joystick.deltaY())
+        }
+
+
+
         if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
             pastyposition = currentyposition
             pastxposition = currentxposition
@@ -72,7 +95,7 @@
     }, 150);
     </script>
     <div id="imagecontainer">
-        <!--  <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480"> -->
+        <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480"> 
     </div>
     <p id="GPS">GPS Data Here!</p>
     <div id="joystickcontainer">
