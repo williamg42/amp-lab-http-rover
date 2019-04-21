@@ -108,7 +108,9 @@ def api_control():
     print('----------------')
     datapayload = 'Lat:{} \n Lon:{} \n Speed:{} \n Course:{}'.format(agps_thread.data_stream.lat,agps_thread.data_stream.lon,agps_thread.data_stream.track,agps_thread.data_stream.speed)
     
-    return (datapayload)
+    return '''
+        "New text!"
+    '''
 
 
 
