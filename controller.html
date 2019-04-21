@@ -70,7 +70,7 @@
 
     setInterval(function() {
 
-         GetGPSData() 
+
 
         if (gamepaddetected) {
             console.log(`Using Gamepad`);
@@ -93,6 +93,16 @@
             var r = new XMLHttpRequest();
             r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
             r.send();
+
+
+
+
+
+            
+        var r = new XMLHttpRequest();
+        r.open("GET", "/api/control/GPS/");
+        r.send();
+        document.getElementById("GPS").innerHTML = r.response;
         }
     }, 150);
     </script>
