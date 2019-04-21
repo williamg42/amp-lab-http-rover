@@ -1,53 +1,48 @@
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" href="/static/css/controller.css">    
-
+    <link rel="stylesheet" href="/static/css/controller.css">
     <img src="/static/img/customLogo.png" alt="AMP Lab Logo">
     <img src="/static/img/ECElogo.png" alt="AMP Lab Logo" align="right">
-
-
-
-
 </head>
+
 <body>
-
-
     <div class="footer">
-      <p>Created by William Gerhard. <br> For more directions visit https://github.com/williamg42/amp-lab-http-rover</p>
-  </div>
+        <p>Created by William Gerhard. <br> For more directions visit https://github.com/williamg42/amp-lab-http-rover</p>
+    </div>
+    <script src="/static/js/gamepad.js"></script>
+    <script>
+    var gamepaddetected = 0;
+    var currentxposition = 0;
+    var currentyposition = 0;
+    var pastxposition = 0;
+    var pastyposition = 0;
+
+    const gamepad = new Gamepad();
+
+    gamepad.on('connect', e => {
+        console.log(`controller ${e.index} connected!`);
+        gamepaddetected = 1;
+    });
+
+    gamepad.on('hold', 'stick_axis_left', e => {
+        console.log(`stick_axis_left has a value of ${e.value}!`);
+        currentxposition = e.value[0];
+        currentyposition = e.value[1];
+    });
 
 
 
 
-
-<script src="/static/js/gamepad.js"></script>
-  <script>
-	  
-	  const gamepad = new Gamepad();
-
-gamepad.on('connect', e => {
-    console.log(`controller ${e.index} connected!`);
-});
-	  
-gamepad.on('hold', 'stick_axis_left', e => {
-    console.log(`stick_axis_left has a value of ${e.value}!`);
-	});
-
-    var currentxposition= 0;
-    var currentyposition= 0;
-    var pastxposition= 0;
-    var pastyposition= 0;
-         
-      
     function GetGPSData() {
 
         var r = new XMLHttpRequest();
         r.open("GET", "/api/control/GPS/");
         r.send();
-     	document.getElementById("GPS").innerHTML = r.response;
-        
+        document.getElementById("GPS").innerHTML = r.response;
+
 
     }
 
@@ -57,53 +52,46 @@ gamepad.on('hold', 'stick_axis_left', e => {
         r.open("GET", "/api/control/drive/" + (0) + "/" + (0));
         r.send();
 
-    }   
-
-
-
-    setInterval(function(){    	    
-		
-
-
-     if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
-
-        pastyposition = currentyposition
-        pastxposition = currentxposition
-
-    } 
-
-    else {
-
-        pastyposition = currentyposition
-        pastxposition = currentxposition
-    
-
-        var r = new XMLHttpRequest();
-        r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
-        r.send();
     }
-		
-    
 
 
-    
 
-}, 150);
-      
- 
-</script>
+    setInterval(function() {
 
-<div id = "imagecontainer">
-<img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center"  width="640" height="480">
-</div>
 
-	<p id="GPS">GPS Data Here!</p>
 
- <div id="joystickcontainer"> 
+        if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
 
-  
-    <center> <font color="white">Touch and drag inside to control your robot! Tap to stop</font> </div>
-</div>
+            pastyposition = currentyposition
+            pastxposition = currentxposition
+
+        } else {
+
+            pastyposition = currentyposition
+            pastxposition = currentxposition
+
+
+            var r = new XMLHttpRequest();
+            r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
+            r.send();
+        }
+
+
+
+
+
+
+    }, 150);
+    </script>
+    <div id="imagecontainer">
+        <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480">
+    </div>
+    <p id="GPS">GPS Data Here!</p>
+    <div id="joystickcontainer">
+        <center>
+            <font color="white">Touch and drag inside to control your robot! Tap to stop</font>
+    </div>
+    </div>
 </body>
-</html>
 
+</html>
