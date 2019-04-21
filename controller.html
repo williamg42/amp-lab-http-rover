@@ -73,6 +73,7 @@
           var x = new XMLHttpRequest();
             x.open("GET", "/api/control/GPS/");
             x.send();
+            document.getElementById("GPS").innerHTML = x.response;
 
 
 
