@@ -22,23 +22,15 @@
 
 
 
-
-  <script src="/static/js/virtualjoystick.js"></script>
   <script>
-    console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
+
 
     var currentxposition= 0;
     var currentyposition= 0;
     var pastxposition= 0;
     var pastyposition= 0;
 
-    var joystick = new VirtualJoystick({
-      container : document.getElementById('container'),
-      mouseSupport: true,
-      stationaryBase: false,
-      limitStickTravel: true,
-      stickRadius: 100
-  });
+
 	  
 	  // Get the state of all gamepads
  gamepads = navigator.getGamepads();
@@ -78,9 +70,7 @@ for (let i = 0; i < gamepads.length; i++) {
         var r = new XMLHttpRequest();
         r.open("GET", "/api/control/GPS/");
         r.send();
-        var body = r.response;
-	var element = document.getElementById("GPS");
-	element.innerHTML = body;
+     	document.getElementById("GPS").innerHTML = r.response;
         
 
     }
@@ -95,7 +85,7 @@ for (let i = 0; i < gamepads.length; i++) {
 
 
 
-    joystick.addEventListener('touchEnd', Senddatazero);
+   
 
 
 
@@ -139,11 +129,9 @@ console.log("Right stick Y: " + currentyposition);
 <div id = "imagecontainer">
 <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center"  width="640" height="480">
 </div>
-<div id = "GPS">
-    
 
-</div>
-    
+	<p id="GPS">GPS Data Here!</p>
+
  <div id="joystickcontainer"> 
 
   
