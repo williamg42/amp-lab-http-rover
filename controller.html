@@ -96,17 +96,10 @@
         }
 
 
-
-        var r = new XMLHttpRequest();
-        r.open("GET", "/api/control/GPS/");
-        r.send();
-        document.getElementById("GPS").innerHTML = r.response;
-
-        
     }, 150);
     </script>
     <div id="imagecontainer">
-        <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480"> 
+        <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480">
     </div>
     <p id="GPS">GPS Data Here!</p>
     <div id="joystickcontainer">
