@@ -33,6 +33,7 @@ gamepad.on('connect', e => {
 	  
 gamepad.on('hold', 'stick_axis_left', e => {
     console.log(`stick_axis_left has a value of ${e.value}!`);
+	});
 
     var currentxposition= 0;
     var currentyposition= 0;
@@ -60,35 +61,7 @@ gamepad.on('hold', 'stick_axis_left', e => {
 
 
 
-    setInterval(function(){    
-	    
-	    	let conCheck = gpLib.testForConnections();
-
-		// Check for connection or disconnection
-		if (conCheck) {
-			console.log(conCheck + " new connections");
-
-		}
-	    
-	    
-	    let gamepads = navigator.getGamepads();
-
-// Blindly assuming this is connected
-let gp = gamepads[0];
-
-// Blindly assuming standard mapping
-let x = gp.axes[2];
-let y = gp.axes[3];
-
-console.log("Right stick X: " + x);
-console.log("Right stick Y: " + y);
-
-if (y < 0) {
-    console.log("Right stick is being pushed up!");
-}
-	    
-	    
-			
+    setInterval(function(){    	    
 		
 
 
