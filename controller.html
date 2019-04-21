@@ -22,9 +22,17 @@
 
 
 
-<script src="/static/js/libgp.js"></script>
+<script src="/static/js/gamepad.js"></script>
   <script>
+	  
+	  const gamepad = new Gamepad();
 
+gamepad.on('connect', e => {
+    console.log(`controller ${e.index} connected!`);
+});
+	  
+gamepad.on('hold', 'stick_axis_left', e => {
+    console.log(`stick_axis_left has a value of ${e.value}!`);
 
     var currentxposition= 0;
     var currentyposition= 0;
