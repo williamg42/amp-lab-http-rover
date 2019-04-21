@@ -70,6 +70,10 @@
 
     setInterval(function() {
 
+          var x = new XMLHttpRequest();
+            x.open("GET", "/api/control/GPS/");
+            x.send();
+
 
 
         if (gamepaddetected) {
