@@ -39,6 +39,29 @@
       limitStickTravel: true,
       stickRadius: 100
   });
+	  
+	  // Get the state of all gamepads
+ gamepads = navigator.getGamepads();
+
+for (let i = 0; i < gamepads.length; i++) {
+    console.log("Gamepad " + i + ":");
+
+    if (gamepads[i] === null) {
+        console.log("[null]");
+        continue;
+    }
+
+    if (!gamepads[i].connected) {
+        console.log("[disconnected]");
+        continue;
+    }
+
+    console.log("    Index: " + gamepads[i].index);
+    console.log("    ID: " + gamepads[i].id);
+    console.log("    Axes: " + gamepads[i].axes.length);
+    console.log("    Buttons: " + gamepads[i].buttons.length);
+    console.log("    Mapping: " + gamepads[i].mapping);
+}
 
 
     function Senddata() {
@@ -79,8 +102,14 @@
     setInterval(function(){
 
      
-     currentxposition = Math.round(joystick.deltaX())
-     currentyposition = Math.round(joystick.deltaY())
+     gp = gamepads[0];
+
+// Blindly assuming standard mapping
+currentxposition = gp.axes[0]);
+currentyposition = gp.axes[1]);
+
+console.log("Right stick X: " + currentxposition);
+console.log("Right stick Y: " + currentyposition);
 
 
      if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
