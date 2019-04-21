@@ -8,7 +8,7 @@ from gps3.agps3threaded import AGPS3mechanism
 from bottle import route, run, Bottle
 from bottle import template
 
-from bottle import get, static_file
+from bottle import get, static_file, request
 
 
 agps_thread = AGPS3mechanism()  # Instantiate AGPS3 Mechan
@@ -108,7 +108,7 @@ def api_control():
     print('----------------')
     datapayload = 'Lat:{} \n Lon:{} \n Speed:{} \n Course:{}'.format(agps_thread.data_stream.lat,agps_thread.data_stream.lon,agps_thread.data_stream.track,agps_thread.data_stream.speed)
     
-    return ("New text!")
+    return '<p>This will be  new data</p>'
    
 
 
