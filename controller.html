@@ -48,7 +48,18 @@
     });
 
 
+    var HttpClient = function() {
+        this.get = function(aUrl, aCallback) {
+            var anHttpRequest = new XMLHttpRequest();
+            anHttpRequest.onreadystatechange = function() {
+                if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                    aCallback(anHttpRequest.responseText);
+            }
 
+            anHttpRequest.open("GET", aUrl, true);
+            anHttpRequest.send(null);
+        }
+    }
 
 
 
@@ -66,10 +77,12 @@
 
         if (count > 150) {
             count = 0;
-            var x = new XMLHttpRequest();
-            x.open("GET", "/api/control/GPS/");
-            x.send();
-            document.getElementById("GPS").innerHTML = x.response;
+            var client = new HttpClient();
+            client.get('/api/control/GPS/', function(response) {
+                // do something with response
+                console.log(response);
+                
+            });
         }
 
 
@@ -99,6 +112,9 @@
 
 
     }, 150);
+
+
+    joystick.addEventListener('touchEnd', Senddatazero);
     </script>
     <div id="imagecontainer">
         <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480">
