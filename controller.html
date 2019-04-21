@@ -24,12 +24,10 @@
     const gamepad = new Gamepad();
 
     gamepad.on('connect', e => {
-        console.log(`controller ${e.index} connected!`);
         gamepaddetected = 1;
     });
 
     gamepad.on('hold', 'stick_axis_left', e => {
-        console.log(`stick_axis_left has a value of ${e.value}!`);
         pos = e.value;
 
     });
