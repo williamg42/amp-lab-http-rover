@@ -70,6 +70,8 @@
 
     setInterval(function() {
 
+         GetGPSData() 
+
         if (gamepaddetected) {
             console.log(`Using Gamepad`);
             currentxposition = Math.round(127 * dataPos[0])
