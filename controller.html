@@ -15,6 +15,7 @@
     <script src="/static/js/gamepad.js"></script>
     <script>
     var gamepaddetected = 0;
+    var dataPos
     var currentxposition = 0;
     var currentyposition = 0;
     var pastxposition = 0;
@@ -29,6 +30,7 @@
 
     gamepad.on('hold', 'stick_axis_left', e => {
         console.log(`stick_axis_left has a value of ${e.value}!`);
+        dataPos = e.value;
 
     });
 
@@ -58,7 +60,7 @@
    
     </script>
     <div id="imagecontainer">
-        <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480">
+      <!--  <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480"> -->
     </div>
     <p id="GPS">GPS Data Here!</p>
     <div id="joystickcontainer">
