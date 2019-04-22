@@ -1,127 +1,130 @@
 @viewport {
-  width: device-width ;
-  zoom: 1;
-} 
+    width: device-width;
+    zoom: 1;
+}
 
 @-ms-viewport {
-  width: device-width ;
+    width: device-width;
 }
 
 .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 @media only screen and (min-width: 300px) {
 
- body {
-        overflow    : hidden;
-        padding     : 0;
-        margin      : 0;
+    body {
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
         background-color: #BBB;
     }
 
     img {
-    max-width: 35%;
-    height: auto;
-    position: relative;
-   
-}
+        max-width: 35%;
+        height: auto;
+        position: relative;
+
+    }
 
     #info {
-        position    : absolute;
-        top     : 0px;
-        width       : 100%;
-        padding     : 5px;
-        text-align  : center;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        padding: 5px;
+        text-align: center;
     }
+
     #info a {
-        color       : #66F;
-        text-decoration : none;
+        color: #66F;
+        text-decoration: none;
     }
+
     #info a:hover {
-        text-decoration : underline;
+        text-decoration: underline;
     }
-    
+
 
     #joystickcontainer {
 
 
-    width: 300px;
-    margin-right: auto;
-    margin-left: auto;
+        width: 300px;
+        margin-right: auto;
+        margin-left: auto;
 
-    height: 350px;
-    background: #800000;
+        height: 350px;
+        background: #800000;
     }
 
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #800000;
-    color: white;
-    text-align: center;
-     font-size: 8px;
-}
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #800000;
+        color: white;
+        text-align: center;
+        font-size: 8px;
+    }
 }
 
 
 @media only screen and (min-width: 992px) {
 
-	 body {
-        overflow    : hidden;
-        padding     : 0;
-        margin      : 0;
+    body {
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
         background-color: #BBB;
     }
 
     img {
-    max-width: 20%;
-    height: auto;
-}
+        max-width: 20%;
+        height: auto;
+    }
 
     #info {
-        position    : absolute;
-        top     : 0px;
-        width       : 100%;
-        padding     : 5px;
-        text-align  : center;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        padding: 5px;
+        text-align: center;
     }
+
     #info a {
-        color       : #66F;
-        text-decoration : none;
+        color: #66F;
+        text-decoration: none;
     }
+
     #info a:hover {
-        text-decoration : underline;
+        text-decoration: underline;
     }
 
 
-    #joystickcontainer {
+    #gpscontainer {
 
+        color: white;
+        width: 400px;
+        margin-right: auto;
+        margin-left: auto;
 
-    width: 400px;
-    margin-right: auto;
-    margin-left: auto;
-
-    height: 400px;
-    background: #800000;
+        height: 400px;
+        background: #800000;
     }
 
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #800000;
-    color: white;
-    text-align: center;
-    font-size: 15px;
-}
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #800000;
+        color: white;
+        text-align: center;
+        font-size: 15px;
+    }
 
 
 }
-
