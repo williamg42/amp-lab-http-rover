@@ -48,6 +48,11 @@
 
     });
 
+    gamepad.on('release', 'stick_axis_left', () => {
+    console.log('Joystick released was released!');
+    dataPos = [0,0];
+});
+
 
     var HttpClient = function() {
         this.get = function(aUrl, aCallback) {

@@ -109,12 +109,13 @@
     }
 
     div.GPSContainer p {
+        width: 200px;
         margin: auto;
         color: white;
         background: #800000;
         position: fixed;
         bottom: 10%;
-        left: 10%;
+        left: 20%;
         margin-right: -50%;
         transform: translate(-50%, -50%)
     }
@@ -125,11 +126,12 @@
     }
 
     div.JoystickContainer p {
+        width: 200px;
         margin: auto;
         color: white;
         background: #800000;
         position: fixed;
-        bottom: 10%;
+        bottom: 15%;
         left: 85%;
         margin-right: 50%;
         transform: translate(-50%, -50%)
