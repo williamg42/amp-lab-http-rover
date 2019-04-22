@@ -81,7 +81,9 @@
             client.get('/api/control/GPS/', function(response) {
                 // do something with response
                 console.log(response);
-                
+                document.getElementById("GPS").innerHTML = response;
+
+
             });
         }
 
