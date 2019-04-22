@@ -102,9 +102,9 @@ def api_gps():
     print('Speed:{} '.format(agps_thread.data_stream.speed))
     print('Course:{}'.format(agps_thread.data_stream.track))
     print('----------------')
-    datapayload = 'Lat:{} \n Lon:{} \n Speed:{} \n Course:{}'.format(agps_thread.data_stream.lat,agps_thread.data_stream.lon,agps_thread.data_stream.track,agps_thread.data_stream.speed)
+    datapayload = '<p>Lat:{} \n Lon:{} \n Speed:{} \n Course:{}</p>'.format(agps_thread.data_stream.lat,agps_thread.data_stream.lon,agps_thread.data_stream.track,agps_thread.data_stream.speed)
     
-    return '<p>This will be  new data</p>'
+    return datapayload
    
 
 
