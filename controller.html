@@ -44,6 +44,7 @@
     gamepad.on('hold', 'stick_axis_left', e => {
         console.log(`stick_axis_left has a value of ${e.value}!`);
         dataPos = e.value;
+        document.getElementById("Joystick").innerHTML = dataPos;
 
     });
 
@@ -84,6 +85,8 @@
                 document.getElementById("GPS").innerHTML = response;
 
 
+
+
             });
         }
 
@@ -121,11 +124,12 @@
     <div id="imagecontainer">
         <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480">
     </div>
-
     <div class=GPSContainer>
-  <p id="GPS">GPS Data Here!</p>
-</div>
-
+        <p id="GPS">GPS Data Here!</p>
+    </div>
+    <div class=JoystickContainer>
+        <p id="Joystick">GPS Data Here!</p>
+    </div>
 </body>
 
 </html>

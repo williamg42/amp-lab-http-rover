@@ -104,14 +104,36 @@
     }
 
     div.GPSContainer {
-   height: 10em;
-   position: relative }              /* 1 */
-div.GPSContainer p {
-   margin: 0;
-   position: absolute;               /* 2 */
-   top: 50%;                         /* 3 */
-   transform: translate(0, -50%) }   /* 4 */
+        height: 150px;
+        position: relative
+    }
 
+    div.GPSContainer p {
+        margin: auto;
+        color: white;
+        background: #800000;
+        position: fixed;
+        bottom: 10%;
+        left: 10%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+    }
+
+    div.JoystickContainer {
+        height: 150px;
+        position: relative
+    }
+
+    div.JoystickContainer p {
+        margin: auto;
+        color: white;
+        background: #800000;
+        position: fixed;
+        bottom: 10%;
+        left: 10%;
+        margin-left: -50%;
+        transform: translate(-50%, -50%)
+    }
 
     #gpscontainer {
 
