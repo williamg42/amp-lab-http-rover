@@ -51,6 +51,7 @@
     gamepad.on('release', 'stick_axis_left', () => {
     console.log('Joystick released was released!');
     dataPos = [0,0];
+    document.getElementById("Joystick").innerHTML = "X value: "+Math.round(127 * dataPos[0])+"<br>"+"Y value: "+Math.round(127 * dataPos[1])+"<br>";
 });
 
 
