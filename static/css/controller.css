@@ -130,8 +130,8 @@
         background: #800000;
         position: fixed;
         bottom: 10%;
-        left: 10%;
-        margin-left: -50%;
+        left: 85%;
+        margin-right: 50%;
         transform: translate(-50%, -50%)
     }
 

@@ -44,7 +44,7 @@
     gamepad.on('hold', 'stick_axis_left', e => {
         console.log(`stick_axis_left has a value of ${e.value}!`);
         dataPos = e.value;
-        document.getElementById("Joystick").innerHTML = dataPos;
+        document.getElementById("Joystick").innerHTML = "X value: "+Math.round(127 * dataPos[0])+"<br>"+"Y value: "+Math.round(127 * dataPos[1])+"<br>";
 
     });
 
