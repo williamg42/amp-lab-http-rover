@@ -42,8 +42,6 @@
     });
         
         
-        const gamepad = new Gamepad();
-
     gamepad.on('disconnect', e => {
         console.log(`controller ${e.index} disconnected!`);
         gamepaddetected = 0;
