@@ -22,76 +22,83 @@
 
 
 
-
-
-  <script src="/static/js/virtualjoystick.js"></script>
-  <script>
+  <script src="/static/js/gamepad.js"></script>
+    <script src="/static/js/virtualjoystick.js"></script>
+    <script>
     console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
-
-    var currentxposition= 0;
-    var currentyposition= 0;
-    var pastxposition= 0;
-    var pastyposition= 0;
-
+    var gamepaddetected = 0;
+    var dataPos = [0, 0];
+    var currentxposition = 0;
+    var currentyposition = 0;
+    var pastxposition = 0;
+    var pastyposition = 0;
+    var count = 0;
     var joystick = new VirtualJoystick({
-      container : document.getElementById('container'),
-      mouseSupport: true,
-      stationaryBase: false,
-      limitStickTravel: true,
-      stickRadius: 100
-  });
-
-
-    function Senddata() {
-
-        var r = new XMLHttpRequest();
-        r.open("GET", "/api/control/drive/" + Math.round(joystick.deltaX()) + "/"+ Math.round(joystick.deltaY()));
-        r.send();
-
+        container: document.getElementById('container'),
+        mouseSupport: true,
+        stationaryBase: false,
+        limitStickTravel: true,
+        stickRadius: 127
+    });
+    const gamepad = new Gamepad();
+    gamepad.on('connect', e => {
+        console.log(`controller ${e.index} connected!`);
+        gamepaddetected = 1;
+    });
+        
+        
+    gamepad.on('disconnect', e => {
+        console.log(`controller ${e.index} disconnected!`);
+        gamepaddetected = 0;
+    });
+    gamepad.on('hold', 'stick_axis_left', e => {
+        console.log(`stick_axis_left has a value of ${e.value}!`);
+        dataPos = e.value;
+        document.getElementById("Joystick").innerHTML = "X value: "+Math.round(127 * dataPos[0])+"<br>"+"Y value: "+Math.round(127 * dataPos[1])+"<br>";
+    });
+    gamepad.on('release', 'stick_axis_left', () => {
+    console.log('Joystick released was released!');
+    dataPos = [0,0];
+    document.getElementById("Joystick").innerHTML = "X value: "+Math.round(127 * dataPos[0])+"<br>"+"Y value: "+Math.round(127 * dataPos[1])+"<br>";
+});
+    var HttpClient = function() {
+        this.get = function(aUrl, aCallback) {
+            var anHttpRequest = new XMLHttpRequest();
+            anHttpRequest.onreadystatechange = function() {
+                if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                    aCallback(anHttpRequest.responseText);
+            }
+            anHttpRequest.open("GET", aUrl, true);
+            anHttpRequest.send(null);
+        }
     }
-
     function Senddatazero() {
-
         var r = new XMLHttpRequest();
         r.open("GET", "/api/control/drive/" + (0) + "/" + (0));
         r.send();
-
     }
 
+        if (gamepaddetected) {
+            console.log(`Using Gamepad`);
+            currentxposition = Math.round(127 * dataPos[0])
+            currentyposition = Math.round(127 * dataPos[1])
+        } else {
+            console.log(`Using VirtualJoystick`);
+            currentxposition = Math.round(joystick.deltaX())
+            currentyposition = Math.round(joystick.deltaY())
+        }
+        if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
+            pastyposition = currentyposition
+            pastxposition = currentxposition
+        } else {
+            pastyposition = currentyposition
+            pastxposition = currentxposition
+            var r = new XMLHttpRequest();
+            r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
+            r.send();
+        }
+    }, 150);
 
-
-    joystick.addEventListener('touchEnd', Senddatazero);
-
-
-
-    setInterval(function(){
-
-
-     currentxposition = Math.round(joystick.deltaX())
-     currentyposition = Math.round(joystick.deltaY())
-
-
-     if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
-
-        pastyposition = currentyposition
-        pastxposition = currentxposition
-
-    } 
-
-    else {
-
-        pastyposition = currentyposition
-        pastxposition = currentxposition
-
-        var r = new XMLHttpRequest();
-        r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
-        r.send();
-
-
-    }
-
-}, 150);
-</script>
 
  <div id="joystickcontainer"> 
     <center> <font color="white">Touch and drag inside to control your robot! Tap to stop</font> </div>
