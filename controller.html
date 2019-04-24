@@ -90,6 +90,8 @@
             console.log(`Using VirtualJoystick`);
             currentxposition = Math.round(joystick.deltaX())
             currentyposition = Math.round(joystick.deltaY())
+            document.getElementById("Joystick").innerHTML = "X value: "+Math.round(currentxposition)+"<br>"+"Y value: "+Math.round(currentyposition)+"<br>";
+
         }
         if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
             pastyposition = currentyposition
@@ -107,6 +109,10 @@
 
  <div id="joystickcontainer"> 
     <center> <font color="white">Touch and drag inside to control your robot! Tap to stop</font> </div>
+     
+       <div class=JoystickContainer>
+        <p id="Joystick">GPS Data Here!</p>
+</div>
 
 </body>
 </html>
