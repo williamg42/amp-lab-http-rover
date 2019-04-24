@@ -91,6 +91,23 @@
     #info a:hover {
         text-decoration : underline;
     }
+	
+	  div.JoystickContainer {
+        height: 150px;
+        position: relative
+    }
+
+    div.JoystickContainer p {
+        width: 200px;
+        margin: auto;
+        color: white;
+        background: #800000;
+        position: fixed;
+        bottom: 15%;
+        left: 85%;
+        margin-right: 50%;
+        transform: translate(-50%, -50%)
+}
 
 
     #joystickcontainer {
