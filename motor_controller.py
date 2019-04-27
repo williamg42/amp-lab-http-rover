@@ -20,6 +20,6 @@ class MotorController:
 
         print(R)
         print(L)
-	command = "./PWM.exe %d %d" % (L, R)
+	command = "./PWM.exe %d %d &" % (L, R)
 	print(command)	
 	os.system(command) 
