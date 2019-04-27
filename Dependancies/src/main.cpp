@@ -24,6 +24,8 @@ void _cleanup(int signum)
 	std::cout << "\nINFO: Caught signal " << signum << std::endl;
 	delete Pwm0;
 	delete Pwm1;
+	gpio_free(15);
+	gpio_free(16);
 	exit(signum);
 }
 
@@ -239,6 +241,8 @@ int main(int argc, char **argv)
 
 	delete Pwm0;
 	delete Pwm1;
+	gpio_free(15);
+	gpio_free(16);
 
 
 
