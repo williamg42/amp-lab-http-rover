@@ -185,23 +185,23 @@ int main(int argc, char **argv)
 	if (nMotMixL > 0)
 	{
 		std::cout << "Left Forward" << " " << dutytimeL << std::endl;
-		Pwm1->setDuty(dutytimeL);
-		gpio_set_value(15, 0);
+		Pwm0->setDuty(dutytimeL);
+		gpio_set_value(15, 1);
 
 	}
 
 	else if (nMotMixL < 0)
 	{
 		std::cout << "Left Reverse" << " " << dutytimeL << std::endl;
-		Pwm1->setDuty(dutytimeL);
-		gpio_set_value(15, 1);
+		Pwm0->setDuty(dutytimeL);
+		gpio_set_value(15, 0);
 
 	}
 
 	else
 	{
 		std::cout << "Left Stop" << " " << dutytimeL << std::endl;
-		Pwm1->setDuty(0);
+		Pwm0->setDuty(0);
 		gpio_set_value(15, 0);
 
 	}
@@ -209,8 +209,8 @@ int main(int argc, char **argv)
 	if (nMotMixR > 0)
 	{
 		std::cout << "Right Forward" << " " << dutytimeR << std::endl;
-		Pwm0->setDuty(dutytimeR);
-		gpio_set_value(16, 0);
+		Pwm1->setDuty(dutytimeR);
+		gpio_set_value(16, 1);
 
 
 	}
@@ -218,8 +218,8 @@ int main(int argc, char **argv)
 	else if (nMotMixR < 0)
 	{
 		std::cout << "Right Reverse" << " " << dutytimeR << std::endl;
-		Pwm0->setDuty(dutytimeR);
-		gpio_set_value(16, 1);
+		Pwm1->setDuty(dutytimeR);
+		gpio_set_value(16, 0);
 
 
 	}
@@ -227,7 +227,7 @@ int main(int argc, char **argv)
 	else
 	{
 		std::cout << "Right Stop" << " " << dutytimeR << std::endl;
-		Pwm0->setDuty(0);
+		Pwm1->setDuty(0);
 		gpio_set_value(15, 0);
 
 
