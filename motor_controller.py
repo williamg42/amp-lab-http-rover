@@ -20,31 +20,6 @@ class MotorController:
 
         print(R)
         print(L)
-	command = ""
-        if L > 0:
-
-            command = "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, L)
-            command = command + "fast-gpio set %d %d &&" % (self.left_motor_r, 1)
-	   	
-	elif L < 0:
-		
-            command = "fast-gpio pwm %d %d %d && " % (self.left_motor_f, 50, abs(L))
-            command = command + "fast-gpio set %d %d &&" % (self.left_motor_r, 0)
-	else:
-	    command = "fast-gpio set %d %d && " % (self.left_motor_f, 0)
-            command = command + "fast-gpio set %d %d &&" % (self.left_motor_r, 0)
-		
-        if R > 0:
-
-            command = command + "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, R)
-            command = command + "fast-gpio set %d %d" % (self.right_motor_r, 1)
-		
-	elif R < 0:
-		
-            command = command+ "fast-gpio pwm %d %d %d && " % (self.right_motor_f, 50, abs(R))
-            command = command + "fast-gpio set %d %d" % (self.right_motor_r, 0)
-	else:
-	    command = command+ "fast-gpio set %d %d && " % (self.right_motor_f, 0)
-            command = command + "fast-gpio set %d %d" % (self.right_motor_r, 0)
+	command = "/root/PWM.exe %d %d" % (L, R)
 	print(command)	
 	os.system(command) 

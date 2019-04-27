@@ -41,46 +41,9 @@ def controller():
 
 @route('/api/control/drive/<value1>/<value2>')
 def api_control(value1=None, value2=None):
-    nJoyX =int(round(float(value1)))
-    nJoyY = int(round(float(value2)))
-    fPivYLimit = 32.0
-    fPivScale = 0
-    nPivSpeed = 0
-    nMotPremixL = 0
-    nMotPremixR = 0
-
- 	# Calculate Drive Turn output due to Joystick X input
-    if (nJoyY >= 0):
-	#x = true_value if condition else false_value
-  # Forward
-    	nMotPremixL = 127.0 if nJoyX >=0 else (127.0 + nJoyX)
-  	nMotPremixR = (127.0 - nJoyX) if nJoyX >=0 else 127.0
-  	
-    else: 
-  # Reverse
-  	nMotPremixL = (127.0 - nJoyX) if nJoyX >=0 else 127.0
-  	nMotPremixR = 127.0 if nJoyX>=0 else (127.0 + nJoyX)
-  	
-
-
-# Scale Drive output due to Joystick Y input (throttle)
-    nMotPremixL = nMotPremixL * nJoyY/128.0
-    nMotPremixR = nMotPremixR * nJoyY/128.0
-
-# Now calculate pivot amount
-# - Strength of pivot (nPivSpeed) based on Joystick X input
-# - Blending of pivot vs drive (fPivScale) based on Joystick Y input
-    nPivSpeed =-1*nJoyX
-    fPivScale = 0.0 if abs(nJoyY)>fPivYLimit else (1.0 - abs(nJoyY)/fPivYLimit)
-
-# Calculate final mix of Drive and Pivot
-    nMotMixL = (1.0-fPivScale)*nMotPremixL + fPivScale*( nPivSpeed)
-    nMotMixR = (1.0-fPivScale)*nMotPremixR + fPivScale*(-nPivSpeed)
-
-    print(nMotMixL)
-    print(nMotMixR)
-    controller.Lg = (nMotMixR - (-127.0)) * ((100.0) - (-100.0)) / ((127.0) - (-127.0)) + (-100.0)
-    controller.Rg = (nMotMixL - (-127.0)) * ((100.0) - (-100.0)) / ((127.0) - (-127.0)) + (-100.0) 
+  
+    controller.Lg = int(round(float(value1)))
+    controller.Rg = int(round(float(value2)))
     controller.drive()
 
 
