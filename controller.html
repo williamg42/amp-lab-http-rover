@@ -86,7 +86,7 @@
             console.log(`Using Gamepad`);
             currentxposition = Math.round(127 * dataPos[0])
             currentyposition = Math.round(127 * dataPos[1])
-            #document.getElementById("Joystick").innerHTML = "X value: "+Math.round(currentxposition)+"<br>"+"Y value: "+Math.round(currentyposition)+"<br>";
+            document.getElementById("Joystick").innerHTML = "X value: "+Math.round(currentxposition)+"<br>"+"Y value: "+Math.round(currentyposition)+"<br>";
 
         } else {
             console.log(`Using VirtualJoystick`);
