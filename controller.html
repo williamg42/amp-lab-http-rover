@@ -1,148 +1,194 @@
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" href="/static/css/controller.css">
-    <img src="/static/img/customLogo.png" alt="AMP Lab Logo">
-    <img src="/static/img/ECElogo.png" alt="AMP Lab Logo" align="right">
-</head>
-
-<body>
-    <div class="footer">
-        <p>Created by William Gerhard. <br> For more directions visit https://github.com/williamg42/amp-lab-http-rover</p>
-    </div>
-    <script src="/static/js/gamepad.js"></script>
-    <script src="/static/js/virtualjoystick.js"></script>
-    <script>
-    console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
-
-    var gamepaddetected = 0;
-    var dataPos = [0, 0];
-    var currentxposition = 0;
-    var currentyposition = 0;
-    var pastxposition = 0;
-    var pastyposition = 0;
-    var count = 0;
-
-
-    var joystick = new VirtualJoystick({
-        container: document.getElementById('container'),
-        mouseSupport: true,
-        stationaryBase: false,
-        limitStickTravel: true,
-        stickRadius: 127
-    });
-
-    const gamepad = new Gamepad();
-
-    gamepad.on('connect', e => {
+    <head>
+        <title>Rover Control</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <img src="/static/img/customLogo.png" alt="AMP Lab Logo">
+        <img src="/static/img/ECElogo.png" alt="AMP Lab Logo" align="right">
+        <link rel="stylesheet" href="/static/css/controller.css">
+        <link rel="stylesheet" href="/static/css/leaflet.css">
+        
+    </head>
+    <body>
+        <div class="footer">
+            <p>Created by William Gerhard. <br> For more directions visit https://github.com/williamg42/amp-lab-http-rover</p>
+        </div>
+        
+        <div id="map"></div>
+        <script src="/static/js/gamepad.js"></script>
+        <script src="/static/js/leaflet.js"></script>
+        <script src="/static/js/virtualjoystick.js"></script>
+        <script>
+        // initialize the map
+        var map = L.map('map').setView([42.35, -71.08], 13);
+        // load a tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+        attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a>',
+        maxZoom: 17,
+        minZoom: 9
+        }).addTo(map);
+        
+        var theMarker = {};
+        
+        var gpswaypoint;
+        
+        var potentialwaypoint;
+        var autonomousenabled = 0;
+        
+        var gamepaddetected = 0;
+        var dataPos = [0, 0];
+        var currentxposition = 0;
+        var currentyposition = 0;
+        var pastxposition = 0;
+        var pastyposition = 0;
+        var count = 1000;
+        const gamepad = new Gamepad();
+        gamepad.on('connect', e => {
         console.log(`controller ${e.index} connected!`);
         gamepaddetected = 1;
-    });
+        });
         
         
-    gamepad.on('disconnect', e => {
+        gamepad.on('disconnect', e => {
         console.log(`controller ${e.index} disconnected!`);
         gamepaddetected = 0;
-    });
-
-    gamepad.on('hold', 'stick_axis_left', e => {
+        });
+        gamepad.on('hold', 'stick_axis_left', e => {
         console.log(`stick_axis_left has a value of ${e.value}!`);
         dataPos = e.value;
         document.getElementById("Joystick").innerHTML = "X value: "+Math.round(127 * dataPos[0])+"<br>"+"Y value: "+Math.round(127 * dataPos[1])+"<br>";
-
-    });
-
-    gamepad.on('release', 'stick_axis_left', () => {
-    console.log('Joystick released was released!');
-    dataPos = [0,0];
-    document.getElementById("Joystick").innerHTML = "X value: "+Math.round(127 * dataPos[0])+"<br>"+"Y value: "+Math.round(127 * dataPos[1])+"<br>";
-});
-
-
-    var HttpClient = function() {
+        });
+        gamepad.on('release', 'stick_axis_left', () => {
+        console.log('Joystick released was released!');
+        dataPos = [0,0];
+        document.getElementById("Joystick").innerHTML = "X value: "+Math.round(127 * dataPos[0])+"<br>"+"Y value: "+Math.round(127 * dataPos[1])+"<br>";
+        });
+        var HttpClient = function() {
         this.get = function(aUrl, aCallback) {
-            var anHttpRequest = new XMLHttpRequest();
-            anHttpRequest.onreadystatechange = function() {
-                if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
-                    aCallback(anHttpRequest.responseText);
-            }
-
-            anHttpRequest.open("GET", aUrl, true);
-            anHttpRequest.send(null);
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() {
+        if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+        aCallback(anHttpRequest.responseText);
         }
-    }
-
-
-
-    function Senddatazero() {
-
+        anHttpRequest.open("GET", aUrl, true);
+        anHttpRequest.send(null);
+        }
+        }
+        function Senddatazero() {
         var r = new XMLHttpRequest();
         r.open("GET", "/api/control/drive/" + (0) + "/" + (0));
         r.send();
-
-    }
-
-
-    setInterval(function() {
+        }
+        var popup = L.popup();
+        function onMapClick(e) {
+        popup
+        .setLatLng(e.latlng)
+        .setContent((e.latlng.toString()).substring(7, (e.latlng.toString()).length - 1))
+        .openOn(map);
+        potentialwaypoint = ((e.latlng.toString()).substring(7, (e.latlng.toString()).length-1)).split(",");
+        }
+        map.on('click', onMapClick);
+        setInterval(function() {
         count = count + 1;
-
-        if (count > 150) {
-            count = 0;
-            var client = new HttpClient();
-            client.get('/api/control/GPS/', function(response) {
-                // do something with response
-                console.log(response);
-                document.getElementById("GPS").innerHTML = response;
-
-
-
-
-            });
+        if (count > 300) {
+        if (theMarker != undefined) {
+        map.removeLayer(theMarker);
+        };
+        count = 0;
+        var client = new HttpClient();
+        client.get('/api/control/GPS/', function(response) {
+        // do something with response
+        console.log(response);
+        var location = response;
+        var array = location.split(":");
+        console.log(array);
+        var hdop = 10;
+        if ( !isNaN(parseFloat(array[2])) )
+        {
+        hdop = array[2]
         }
-
-
-
+        map.setView(new L.LatLng(parseFloat(array[0]), parseFloat(array[1])), 15);
+        theMarker = L.circle([parseFloat(array[0]), parseFloat(array[1])], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: hdop
+        }).addTo(map);
+        });
+        }
         if (gamepaddetected) {
-            console.log(`Using Gamepad`);
-            currentxposition = Math.round(127 * dataPos[0])
-            currentyposition = Math.round(127 * dataPos[1])
-	    document.getElementById("Joystick").innerHTML = "X value: "+Math.round(currentxposition)+"<br>"+"Y value: "+Math.round(currentyposition)+"<br>";
+        console.log(`Using Gamepad`);
+        currentxposition = Math.round(127 * dataPos[0])
+        currentyposition = Math.round(127 * dataPos[1])
+        document.getElementById("Joystick").innerHTML = "X value: "+Math.round(currentxposition)+"<br>"+"Y value: "+Math.round(currentyposition)+"<br>";
         } else {
-            console.log(`Using VirtualJoystick`);
-            currentxposition = Math.round(joystick.deltaX())
-            currentyposition = Math.round(joystick.deltaY())
-            document.getElementById("Joystick").innerHTML = "X value: "+Math.round(currentxposition)+"<br>"+"Y value: "+Math.round(currentyposition)+"<br>";
-	}
-
-
-        if ((currentxposition == pastxposition) && (currentyposition == pastyposition)) {
-            pastyposition = currentyposition
-            pastxposition = currentxposition
-        } else {
-            pastyposition = currentyposition
-            pastxposition = currentxposition
-            var r = new XMLHttpRequest();
-            r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
-            r.send();
+        console.log(`Using Gamepad`);
+        
+        
         }
-
-
-    }, 150);
-
-
-    joystick.addEventListener('touchEnd', Senddatazero);
-    </script>
-    <div id="imagecontainer">
-        <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480">
-    </div>
-    <div class=GPSContainer>
-        <p id="GPS">GPS Data Here!</p>
-    </div>
-    <div class=JoystickContainer>
-        <p id="Joystick">GPS Data Here!</p>
-    </div>
-</body>
-
+        if ((currentxposition == pastxposition) && (currentyposition == pastyposition )) {
+        pastyposition = currentyposition
+        pastxposition = currentxposition
+        } else {
+        pastyposition = currentyposition
+        pastxposition = currentxposition
+        if(!autonomousenabled)
+        {
+        var r = new XMLHttpRequest();
+        r.open("GET", "/api/control/drive/" + currentxposition + "/" + currentyposition);
+        r.send();
+        }
+        }
+        }, 150);
+        joystick.addEventListener('touchEnd', Senddatazero);
+        function SaveWaypoint() {
+        gpswaypoint = potentialwaypoint;
+        document.getElementById("Waypoint").innerHTML = "Lat: " + gpswaypoint[0] + " Long: " + gpswaypoint[1] ;
+        }
+        function toggleFunct() {
+        // Get the checkbox
+        var checkBox = document.getElementById("myCheck");
+        
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true){
+        autonomousenabled = 0;
+        var r = new XMLHttpRequest();
+        r.open("GET", "/autonomous/stop");
+        r.send();
+        } else {
+        autonomousenabled = 1;
+        var r = new XMLHttpRequest();
+        r.open("GET", "/autonomous/start/"+gpswaypoint[0]+ "/" + gpswaypoint[1].substring(1));
+        r.send();
+        }
+        }
+        
+        </script>
+        <!--     <div id="imagecontainer">
+            <img src="http://192.168.3.1:8080/?action=stream" alt="http://192.168.3.1:8080/?action=stream" class="center" width="640" height="480">
+        </div> -->
+        <!--     <div class=GPSContainer>
+            <p id="GPS">GPS Data Here!</p>
+        </div> -->
+        <div class=Waypoint>
+            <p id="Waypoint">Lat: NA Long: NA</p>
+        </div>
+        
+        <div class=JoystickContainer>
+            <p id="Joystick">GPS Data Here!</p>
+        </div>
+        <div class=WayPointButton>
+            <button onclick="SaveWaypoint()">Save Waypoint</button>
+        </div>
+        
+        <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myCheck" onclick="toggleFunct()" checked>
+            <label class="onoffswitch-label" for="myCheck">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
+        
+    </body>
 </html>

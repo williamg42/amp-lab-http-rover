@@ -11,6 +11,8 @@ class MockMotorController:
         self._motor_calibrate_r = 100
         self._xvalue = 0
         self._yvalue = 0
+        self.Rg = 0
+        self.Lg = 0
 
    
 

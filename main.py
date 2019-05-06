@@ -2,11 +2,18 @@ import sys
 import threading
 import time
 import math
-from motor_controller import MotorController
+#from motor_controller import MotorController
+from mock_motor_controller import MockMotorController
+from autonomous_controller import AutonomousController
 from gps3.agps3threaded import AGPS3mechanism
 
 from bottle import route, run, Bottle
 from bottle import template
+
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 
 from bottle import get, static_file, request
 
@@ -38,6 +45,19 @@ def js(filepath):
 def controller():
     return template('controller.html')
 
+@route('/autonomous/start/<latval>/<longval>')
+def api_control(latval=None, longval=None):
+    autonomous.lat = latval
+    autonomous.long = longval
+    autonomous.Run = 1
+    autonomous.Navigate()
+    return ('')
+
+@route('/autonomous/stop')
+def api_autonomousstop():
+    autonomous.Run = 0
+    autonomous.Kill()
+    return ('')
 
 @route('/api/control/drive/<value1>/<value2>')
 def api_control(value1=None, value2=None):
@@ -65,8 +85,8 @@ def api_gps():
     print('Speed:{} '.format(agps_thread.data_stream.speed))
     print('Course:{}'.format(agps_thread.data_stream.track))
     print('----------------')
-    datapayload = '<p>Lat:{} <br> Lon:{} <br> Speed:{} <br> Course:{}</p>'.format(agps_thread.data_stream.lat,agps_thread.data_stream.lon,agps_thread.data_stream.track,agps_thread.data_stream.speed)
-    
+    datapayload = '{}:{}:{}'.format(agps_thread.data_stream.lat,agps_thread.data_stream.lon, agps_thread.data_stream.hdop)
+    #datapayload = '37.214842:-80.445229:100'
     return datapayload
    
 
@@ -78,9 +98,11 @@ def main():
         print('Usage: python main.py [left_motor_pin_number_forward] [right_motor_pin_number_forward] [left_motor_pin_number_reverse] [right_motor_pin_number_reverse] ')
     else:
         try:
+            global autonomous
             global controller
-            controller = MotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
-            #controller = MockMotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
+            #controller = MotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
+            controller = MockMotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
+            autonomous = AutonomousController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
             run(host='0.0.0.0', port=8000, debug=True)
 
         except ValueError:

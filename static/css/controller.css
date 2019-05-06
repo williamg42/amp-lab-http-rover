@@ -1,163 +1,153 @@
 @viewport {
-    width: device-width;
-    zoom: 1;
+width: device-width;
+zoom: 1;
 }
-
 @-ms-viewport {
-    width: device-width;
+width: device-width;
 }
-
 .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%;
 }
-
-@media only screen and (min-width: 300px) {
-
-    body {
-        overflow: hidden;
-        padding: 0;
-        margin: 0;
-        background-color: #BBB;
-    }
-
-    img {
-        max-width: 35%;
-        height: auto;
-        position: relative;
-
-    }
-
-    #info {
-        position: absolute;
-        top: 0px;
-        width: 100%;
-        padding: 5px;
-        text-align: center;
-    }
-
-    #info a {
-        color: #66F;
-        text-decoration: none;
-    }
-
-    #info a:hover {
-        text-decoration: underline;
-    }
-
-
-    #joystickcontainer {
-
-
-        width: 300px;
-        margin-right: auto;
-        margin-left: auto;
-
-        height: 350px;
-        background: #800000;
-    }
-
-    .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: #800000;
-        color: white;
-        text-align: center;
-        font-size: 8px;
-    }
-}
-
-
 @media only screen and (min-width: 992px) {
-
-    body {
-        overflow: hidden;
-        padding: 0;
-        margin: 0;
-        background-color: #BBB;
-    }
-
-    img {
-        max-width: 20%;
-        height: auto;
-    }
-
-    #info {
-        position: absolute;
-        top: 0px;
-        width: 100%;
-        padding: 5px;
-        text-align: center;
-    }
-
-    #info a {
-        color: #66F;
-        text-decoration: none;
-    }
-
-    #info a:hover {
-        text-decoration: underline;
-    }
-
-    div.GPSContainer {
-        height: 150px;
-        position: relative
-    }
-
-    div.GPSContainer p {
-        width: 200px;
-        margin: auto;
-        color: white;
-        background: #800000;
-        position: fixed;
-        bottom: 10%;
-        left: 20%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%)
-    }
-
-    div.JoystickContainer {
-        height: 150px;
-        position: relative
-    }
-
-    div.JoystickContainer p {
-        width: 200px;
-        margin: auto;
-        color: white;
-        background: #800000;
-        position: fixed;
-        bottom: 15%;
-        left: 85%;
-        margin-right: 50%;
-        transform: translate(-50%, -50%)
-    }
-
-    #gpscontainer {
-
-        color: white;
-        width: 400px;
-        margin-right: auto;
-        margin-left: auto;
-
-        height: 400px;
-        background: #800000;
-    }
-
-    .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: #800000;
-        color: white;
-        text-align: center;
-        font-size: 15px;
-    }
-
-
+body {
+overflow: hidden;
+padding: 0;
+margin: 0;
+background-color: #BBB;
+}
+img {
+max-width: 20%;
+height: auto;
+}
+#info {
+position: absolute;
+top: 0px;
+width: 100%;
+padding: 5px;
+text-align: center;
+}
+#info a {
+color: #66F;
+text-decoration: none;
+}
+#map{ width: 600px; height: 400px; position: fixed;
+bottom: -20%;
+left: 25%;
+margin-right: -50%;
+transform: translate(-50%, -50%)}
+#info a:hover {
+text-decoration: underline;
+}
+div.GPSContainer {
+height: 150px;
+position: relative
+}
+div.GPSContainer p {
+width: 200px;
+margin: auto;
+color: white;
+background: #800000;
+position: fixed;
+bottom: 10%;
+left: 20%;
+margin-right: -50%;
+transform: translate(-50%, -50%)
+}
+.Waypoint {
+position: fixed;
+bottom: 40%;
+left: 50%;
+margin-right: 50%;
+}
+.WayPointButton {
+position: fixed;
+bottom: 25%;
+left: 50%;
+margin-right: 50%;
+}
+div.JoystickContainer {
+height: 150px;
+position: relative
+}
+div.JoystickContainer p {
+width: 200px;
+margin: auto;
+color: white;
+background: #800000;
+position: fixed;
+bottom: 15%;
+left: 85%;
+margin-right: 50%;
+transform: translate(-50%, -50%)
+}
+#gpscontainer {
+color: white;
+width: 400px;
+margin-right: auto;
+margin-left: auto;
+height: 400px;
+background: #800000;
+}
+.footer {
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: #800000;
+color: white;
+text-align: center;
+font-size: 15px;
+}
+.onoffswitch {
+position: relative; width: 90px;
+-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+position: fixed;
+bottom: 20%;
+left: 50%;
+margin-right: 50%;
+}
+.onoffswitch-checkbox {
+display: none;
+}
+.onoffswitch-label {
+display: block; overflow: hidden; cursor: pointer;
+border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+display: block; width: 200%; margin-left: -100%;
+transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+content: "OFF";
+padding-left: 10px;
+background-color: #FF0000; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+content: "ON";
+padding-right: 10px;
+background-color: #00FF33; color: #FFFFFF;
+text-align: right;
+}
+.onoffswitch-switch {
+display: block; width: 14px; margin: 8px;
+background: #FFFFFF;
+position: absolute; top: 0; bottom: 0;
+right: 56px;
+border: 2px solid #999999; border-radius: 20px;
+transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+right: 0px;
+}
 }
