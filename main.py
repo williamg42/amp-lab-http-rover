@@ -43,8 +43,8 @@ def controller():
 
 @route('/autonomous/start/<latval>/<longval>')
 def api_control(latval=None, longval=None):
-    autonomous.lat = latval
-    autonomous.long = longval
+    autonomous.Lat = float(latval)
+    autonomous.Long = float(longval)
     autonomous.Run = 1
     autonomous.Navigate()
     return ('')
@@ -98,7 +98,7 @@ def main():
             global controller
             #controller = MotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
             controller = MockMotorController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
-            autonomous = AutonomousController(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
+            autonomous = AutonomousController()
             run(host='0.0.0.0', port=8000, debug=True)
 
         except ValueError:
