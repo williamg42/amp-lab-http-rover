@@ -20,7 +20,7 @@
         <script src="/static/js/virtualjoystick.js"></script>
         <script>
         // initialize the map
-        var map = L.map('map').setView([42.35, -71.08], 13);
+        var map = L.map('map').setView([37.214842, -80.445229], 13);
         // load a tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
@@ -91,7 +91,7 @@
         map.on('click', onMapClick);
         setInterval(function() {
         count = count + 1;
-        if (count > 300) {
+        if (count > 150) {
         if (theMarker != undefined) {
         map.removeLayer(theMarker);
         };

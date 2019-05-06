@@ -15,13 +15,13 @@ class AutonomousController:
 
     def Navigate(self):
         print('Autonomous Navigation Enabled')
-        command = "exec ./test.exe %d %d %d %d %d %d &" % (42.35, -71.08, 280.2, self.Lat, self.Long, 280.2)
+        command = "exec ./test.exe %d %d %d %d %d %d &" % (37.215043,  -80.444917, 280.2, self.Lat, self.Long, 280.2)
         global proc
-        proc = subprocess.Popen(command, shell=True,
-             stdin=None, stdout=None, stderr=None, close_fds=True)
+        proc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid, stdin=None, stdout=None, stderr=None, close_fds=True)
 
     def Kill(self):
         print('Kill')
-        proc.kill()
+        os.killpg(os.getpgid(proc.pid), signal.SIGTERM) 
 
    
+
