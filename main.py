@@ -10,10 +10,6 @@ from gps3.agps3threaded import AGPS3mechanism
 from bottle import route, run, Bottle
 from bottle import template
 
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-
 
 from bottle import get, static_file, request
 
