@@ -17,14 +17,14 @@ class AutonomousController:
         print('Autonomous Navigation Enabled')
 	lat = self.Lat
 	long = self.Long
-        command = "exec ./test.exe %f %f %f %s %s %s &" % (37.215043,  -80.444917, 280.2, lat, long, 280.2)
+        command = "exec ./test.exe %f %f %s %s &" % (37.215043,  -80.444917, lat, long)
         print(command)
 	global proc
         proc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid, stdin=None, stdout=None, stderr=None, close_fds=True)
 
     def Kill(self):
         print('Kill')
-        os.killpg(os.getpgid(proc.pid), signal.SIGTERM) 
+        os.killpg(os.getpgid(proc.pid), signal.SIGINT) 
 
    
 
