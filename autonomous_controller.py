@@ -17,6 +17,7 @@ class AutonomousController:
         print('Autonomous Navigation Enabled')
 	lat = self.Lat
 	long = self.Long
+
         command = "exec ./test.exe %f %f %s %s &" % (37.215043,  -80.444917, lat, long)
         print(command)
 	global proc
