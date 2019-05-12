@@ -79,8 +79,8 @@ def api_control(value1=None, value2=None):
 
     print(nMotMixL)
     print(nMotMixR)
-    controller.Lg = valmap(nMotMixL, -127, 127,100,-100)
-    controller.Rg = valmap(nMotMixR, -127, 127,100,-100)
+    controller.Rg = valmap(nMotMixL, -127, 127,-100,100)
+    controller.Lg = valmap(nMotMixR, -127, 127,-100,100)
     controller.drive()
     return ('')
 
