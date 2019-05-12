@@ -11,6 +11,12 @@ from bottle import template
 from bottle import get, static_file
 
 
+def valmap(x, in_min, in_max, out_min, out_max):
+    if ((in_max - in_min) > (out_max - out_min)):
+	return (x - in_min) * (out_max - out_min + 1) / (in_max - in_min + 1) + out_min;
+    else:
+	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    
 # Static Routes
 @get("/static/css/<filepath:re:.*\.css>")
 def css(filepath):
@@ -73,8 +79,8 @@ def api_control(value1=None, value2=None):
 
     print(nMotMixL)
     print(nMotMixR)
-    controller.Lg = (nMotMixR - (-127.0)) * ((100.0) - (-100.0)) / ((127.0) - (-127.0)) + (-100.0)
-    controller.Rg = (nMotMixL - (-127.0)) * ((100.0) - (-100.0)) / ((127.0) - (-127.0)) + (-100.0) 
+    controller.Lg = valmap(nMotMixL, -127, 127,100,-100)
+    controller.Rg = valmap(nMotMixR, -127, 127,100,-100)
     controller.drive()
     return ('')
 
