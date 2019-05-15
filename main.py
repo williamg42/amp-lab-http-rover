@@ -70,7 +70,7 @@ def api_control(value1=None, value2=None):
 # Now calculate pivot amount
 # - Strength of pivot (nPivSpeed) based on Joystick X input
 # - Blending of pivot vs drive (fPivScale) based on Joystick Y input
-    nPivSpeed =-1*nJoyX
+    nPivSpeed =1*nJoyX
     fPivScale = 0.0 if abs(nJoyY)>fPivYLimit else (1.0 - abs(nJoyY)/fPivYLimit)
 
 # Calculate final mix of Drive and Pivot
