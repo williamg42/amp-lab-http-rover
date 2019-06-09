@@ -7,6 +7,8 @@ Please view the [Getting Started](https://docs.onion.io/omega2-docs/first-time-s
 
 There is an [easy guide](https://docs.onion.io/omega2-docs/connecting-to-wifi-networks-command-line.html) for configuring your network connection provided by Onion.
 
+There is also a youtube video showing the step by step process [here](https://tinyurl.com/amplab-rover-video)
+
 One that is done, follow the following procedure.
 
 - Connect to your Onion device over WiFi.
